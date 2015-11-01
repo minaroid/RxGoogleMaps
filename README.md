@@ -43,7 +43,7 @@ protected void onCreate(Bundle savedInstanceState) {
 
 ## API
 
-There is just one class to interact with which is 'MapObservableProvider'.
+There is just one class to interact with which is `MapObservableProvider`.
 
 
 
