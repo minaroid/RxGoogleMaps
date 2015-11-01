@@ -41,7 +41,12 @@ protected void onCreate(Bundle savedInstanceState) {
 }
 ```
 
+## API
 
-### Setup Example
+There is just one class to interact with which is 'MapObservableProvider'.
+
+
+
+### Example Setup 
 
 To use the example add `apikey=<your google api key>` to `local.properties` 
