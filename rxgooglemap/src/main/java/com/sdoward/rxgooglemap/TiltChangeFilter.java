@@ -1,4 +1,4 @@
-package com.sdoward.rxgooglemap.cameraChange;
+package com.sdoward.rxgooglemap;
 
 import com.google.android.gms.maps.model.CameraPosition;
 
