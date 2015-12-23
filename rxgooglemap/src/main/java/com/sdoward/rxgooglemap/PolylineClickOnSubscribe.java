@@ -5,13 +5,13 @@ import com.google.android.gms.maps.model.Polyline;
 
 import rx.Observer;
 
-class PolylineClickObservable extends BaseOnSubscribe<Polyline> {
+class PolylineClickOnSubscribe extends BaseOnSubscribe<Polyline> {
 
-    public static PolylineClickObservable getOnSubscribe(SupportMapFragment supportMapFragment) {
-        return new PolylineClickObservable(supportMapFragment);
+    public static PolylineClickOnSubscribe getOnSubscribe(SupportMapFragment supportMapFragment) {
+        return new PolylineClickOnSubscribe(supportMapFragment);
     }
 
-    private PolylineClickObservable(SupportMapFragment supportMapFragment) {
+    private PolylineClickOnSubscribe(SupportMapFragment supportMapFragment) {
         super(supportMapFragment);
     }
 

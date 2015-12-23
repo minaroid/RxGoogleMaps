@@ -5,13 +5,13 @@ import com.google.android.gms.maps.model.Polygon;
 
 import rx.Observer;
 
-class PolygonClickObservable extends BaseOnSubscribe<Polygon> {
+class PolygonClickOnSubscribe extends BaseOnSubscribe<Polygon> {
 
-    public static PolygonClickObservable getOnSubscribe(SupportMapFragment supportMapFragment) {
-        return new PolygonClickObservable(supportMapFragment);
+    public static PolygonClickOnSubscribe getOnSubscribe(SupportMapFragment supportMapFragment) {
+        return new PolygonClickOnSubscribe(supportMapFragment);
     }
 
-    private PolygonClickObservable(SupportMapFragment supportMapFragment) {
+    private PolygonClickOnSubscribe(SupportMapFragment supportMapFragment) {
         super(supportMapFragment);
     }
 

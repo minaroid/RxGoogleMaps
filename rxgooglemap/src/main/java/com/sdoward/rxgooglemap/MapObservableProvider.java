@@ -76,11 +76,15 @@ public class MapObservableProvider {
     }
 
     public Observable<Polyline> getPolylineClickObservable() {
-        return Observable.create(PolylineClickObservable.getOnSubscribe(supportMapFragment));
+        return Observable.create(PolylineClickOnSubscribe.getOnSubscribe(supportMapFragment));
     }
 
     public Observable<Polygon> getPolygonClickObservable() {
-        return Observable.create(PolygonClickObservable.getOnSubscribe(supportMapFragment));
+        return Observable.create(PolygonClickOnSubscribe.getOnSubscribe(supportMapFragment));
+    }
+
+    public Observable<GroundOverlay> getGroundOverlayObservable() {
+        return Observable.create(GroundOverlayClickOnSubscribe.getOnSubscribe(supportMapFragment));
     }
 
 }
