@@ -15,13 +15,12 @@ ext {
     exampleDependencies = [
             playServices: "com.google.android.gms:play-services:${playServicesVersion}",
             appCompat   : "com.android.support:appcompat-v7:${supportVersion}",
-            rxAndroid    : "io.reactivex:rxandroid:${rxAndroidVersion}",
+            rxAndroid   : "io.reactivex:rxandroid:${rxAndroidVersion}",
             rxJava      : "io.reactivex:rxjava:${rxJavaVersion}"
     ]
 
     libraryDependencies = [
             playServices: "com.google.android.gms:play-services:${playServicesVersion}",
-            rxAndroid    : "io.reactivex:rxandroid:${rxAndroidVersion}",
             rxJava      : "io.reactivex:rxjava:${rxJavaVersion}"
     ]
 
