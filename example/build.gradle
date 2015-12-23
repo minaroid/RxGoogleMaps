@@ -16,7 +16,7 @@ android {
             Properties properties = new Properties()
             properties.load(project.rootProject.file('local.properties').newDataInputStream())
             def apiKey = properties.getProperty('apikey')
-            resValue "string", "google_maps_api_key", apiKey
+            resValue "string", "google_maps_key", apiKey
         }
         release {
             minifyEnabled false
