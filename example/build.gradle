@@ -12,15 +12,18 @@ android {
         versionName "0.1"
     }
     buildTypes {
+
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        def apiKey = properties.getProperty('apikey')
+
         debug {
-            Properties properties = new Properties()
-            properties.load(project.rootProject.file('local.properties').newDataInputStream())
-            def apiKey = properties.getProperty('apikey')
             resValue "string", "google_maps_key", apiKey
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            resValue "string", "google_maps_key", apiKey
         }
     }
 }
