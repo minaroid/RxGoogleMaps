@@ -75,4 +75,8 @@ public class MapObservableProvider {
         return Observable.create(IndoorBuildingFocusedOnSubscribe.getOnSubscribe(supportMapFragment));
     }
 
+    public Observable<Polyline> getPolylineClickObservable() {
+        return Observable.create(PolylineClickObservable.getOnSubscribe(supportMapFragment));
+    }
+
 }
