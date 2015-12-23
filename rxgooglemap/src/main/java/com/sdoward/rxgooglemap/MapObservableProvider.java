@@ -92,16 +92,6 @@ public class MapObservableProvider {
         return mapSubject.flatMap(new CameraPositionFunc());
     }
 
-    public Observable<CameraPosition> getCameraTiltChangeObservable() {
-        return mapSubject.flatMap(new CameraPositionFunc())
-                .filter(new TiltChangeFilter());
-    }
-
-    public Observable<CameraPosition> getCameraZoomChangeObservable() {
-        return mapSubject.flatMap(new CameraPositionFunc())
-                .filter(new ZoomLevelFilter());
-    }
-
     public Observable<IndoorBuildingEvent> getIndoorBuildingObservable() {
         return mapSubject.flatMap(new IndoorBuildingFunc());
     }
