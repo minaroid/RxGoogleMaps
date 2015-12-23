@@ -1,6 +1,6 @@
 package com.sdoward.rxgooglemap;
 
-import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.*;
 
 import rx.Observable;
@@ -11,6 +11,10 @@ public class MapObservableProvider {
 
     public MapObservableProvider(SupportMapFragment supportMapFragment) {
         this.supportMapFragment = supportMapFragment;
+    }
+
+    public Observable<GoogleMap> getMapReadyObservable() {
+        return Observable.create(MapReadyOnSubscribe.getMapReadOnSubscribe(supportMapFragment));
     }
 
     public Observable<LatLng> getMapClickObservable() {
