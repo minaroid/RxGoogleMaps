@@ -102,12 +102,8 @@ public class MapObservableProvider {
                 .filter(new ZoomLevelFilter());
     }
 
-    public Observable<IndoorBuilding> getIndoorLevelActivatedOnSubscribe() {
-        return mapSubject.flatMap(new IndoorLevelActivatedFunc());
-    }
-
-    public Observable<Void> getIndoorBuildingFocusedOnSubscribe() {
-        return mapSubject.flatMap(new IndoorBuildingFocusedFunc());
+    public Observable<IndoorBuildingEvent> getIndoorBuildingObservable() {
+        return mapSubject.flatMap(new IndoorBuildingFunc());
     }
 
     public Observable<Polyline> getPolylineClickObservable() {
