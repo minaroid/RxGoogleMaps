@@ -33,7 +33,7 @@ dependencies {
     def exampleDependencies = rootProject.ext.exampleDependencies
 
     compile exampleDependencies.appCompat
-    compile exampleDependencies.playServices
+    compile exampleDependencies.googleMaps
     compile exampleDependencies.rxAndroid
     compile exampleDependencies.rxJava
 

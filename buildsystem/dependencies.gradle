@@ -6,22 +6,28 @@ allprojects {
 
 ext {
 
-    playServicesVersion = '8.4.0'
+    googleMapsVersion = '8.4.0'
     supportVersion = '23.0.1'
     rxAndroidVersion = '1.1.0'
     rxJavaVersion = '1.1.0'
 
+    robolectricVersion = '3.0'
+
 
     exampleDependencies = [
-            playServices: "com.google.android.gms:play-services:${playServicesVersion}",
+            googleMaps: "com.google.android.gms:play-services-maps:${googleMapsVersion}",
             appCompat   : "com.android.support:appcompat-v7:${supportVersion}",
             rxAndroid   : "io.reactivex:rxandroid:${rxAndroidVersion}",
             rxJava      : "io.reactivex:rxjava:${rxJavaVersion}"
     ]
 
     libraryDependencies = [
-            playServices: "com.google.android.gms:play-services:${playServicesVersion}",
+            googleMaps: "com.google.android.gms:play-services-maps:${googleMapsVersion}",
             rxJava      : "io.reactivex:rxjava:${rxJavaVersion}"
+    ]
+
+    libraryTestDependencies = [
+            robolectric: "org.robolectric:robolectric:${robolectricVersion}"
     ]
 
 }

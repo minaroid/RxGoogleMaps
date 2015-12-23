@@ -20,6 +20,9 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [
+                    lib_name: "RxGoogleMaps"
+            ]
         }
     }
 }
@@ -28,9 +31,9 @@ dependencies {
 
     def libraryDependencies = rootProject.ext.libraryDependencies
 
-    compile libraryDependencies.playServices
+    compile libraryDependencies.googleMaps
     compile libraryDependencies.rxJava
-    
+
 }
 
 apply from: 'https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle'
