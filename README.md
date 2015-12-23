@@ -19,23 +19,16 @@ This provides the following observables...
  - MapReady
  - MapClick
  - MapLngClick
- - DragStart
- - Drag
- - DragEnd
+ - PolylineClick
+ - PolygonClick
+ - GroundOverlayClick
  - MarkerClick
  - InfoWindowClick
  - InfoWindowLongClick
  - InfoWindowClose
+ - DragChange
  - CameraChange
- - CameraTilt
- - CameraZoom
- - IndoorLevelActivated
- - IndoorBuildingFocused
- - PolylineClick
- - PolygonClick
- - GroundOverlayClick
-
-
+ - IndoorBuildingChange
 
 ### Example Setup 
 

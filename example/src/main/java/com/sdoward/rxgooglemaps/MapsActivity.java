@@ -28,15 +28,6 @@ public class MapsActivity extends FragmentActivity {
                 Log.d(MapsActivity.class.getName(), "camera position");
             }
         });
-        mapObservableProvider.getCameraTiltChangeObservable()
-                .subscribe(new Action1<CameraPosition>() {
-                    @Override
-                    public void call(CameraPosition cameraPosition) {
-                        Log.d(MapsActivity.class.getName(), "camera tilt");
-                    }
-                });
-
     }
-
 
 }
