@@ -3,88 +3,130 @@ package com.sdoward.rxgooglemap;
 import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.*;
 
-import rx.Observable;
+import rx.*;
+import rx.subjects.*;
 
 public class MapObservableProvider {
 
-    private final SupportMapFragment supportMapFragment;
+    private Subject<GoogleMap, GoogleMap> mapSubject = BehaviorSubject.create();
 
-    public MapObservableProvider(SupportMapFragment supportMapFragment) {
-        this.supportMapFragment = supportMapFragment;
+    public MapObservableProvider(final SupportMapFragment supportMapFragment) {
+        Observable.create(new Observable.OnSubscribe<GoogleMap>() {
+            @Override
+            public void call(final Subscriber<? super GoogleMap> subscriber) {
+                OnMapReadyCallback mapReadyCallback = new OnMapReadyCallback() {
+                    @Override
+                    public void onMapReady(GoogleMap googleMap) {
+                        subscriber.onNext(googleMap);
+                    }
+                };
+                supportMapFragment.getMapAsync(mapReadyCallback);
+            }
+        }).subscribe(mapSubject);
+    }
+
+    public MapObservableProvider(final MapFragment mapFragment) {
+        Observable.create(new Observable.OnSubscribe<GoogleMap>() {
+            @Override
+            public void call(final Subscriber<? super GoogleMap> subscriber) {
+                OnMapReadyCallback mapReadyCallback = new OnMapReadyCallback() {
+                    @Override
+                    public void onMapReady(GoogleMap googleMap) {
+                        subscriber.onNext(googleMap);
+                    }
+                };
+                mapFragment.getMapAsync(mapReadyCallback);
+            }
+        }).subscribe(mapSubject);
+    }
+
+    public MapObservableProvider(final MapView mapView) {
+        Observable.create(new Observable.OnSubscribe<GoogleMap>() {
+            @Override
+            public void call(final Subscriber<? super GoogleMap> subscriber) {
+                OnMapReadyCallback mapReadyCallback = new OnMapReadyCallback() {
+                    @Override
+                    public void onMapReady(GoogleMap googleMap) {
+                        subscriber.onNext(googleMap);
+                    }
+                };
+                mapView.getMapAsync(mapReadyCallback);
+            }
+        }).subscribe(mapSubject);
     }
 
     public Observable<GoogleMap> getMapReadyObservable() {
-        return Observable.create(MapReadyOnSubscribe.getOnSubscribe(supportMapFragment));
+        return mapSubject;
     }
 
     public Observable<LatLng> getMapClickObservable() {
-        return Observable.create(MapClickOnSubscribe.getOnSubscribe(supportMapFragment));
+        return mapSubject.flatMap(new MapClickFunc());
     }
 
     public Observable<LatLng> getMapLongClickObservable() {
-        return Observable.create(MapLongClickOnSubscribe.getOnSubscribe(supportMapFragment));
+        return mapSubject.flatMap(new MapLongClickFunc());
     }
 
     public Observable<Marker> getDragStartObservable() {
-        return Observable.create(MarkerDragStartOnSubscribe.getOnSubscribe(supportMapFragment));
+        return mapSubject.flatMap(new MarkerDragStartFunc());
     }
 
     public Observable<Marker> getDragObservable() {
-        return Observable.create(MarkerDragOnSubscribe.getOnSubscribe(supportMapFragment));
+        return mapSubject.flatMap(new MarkerDragFunc());
     }
 
     public Observable<Marker> getDragEndObservable() {
-        return Observable.create(MarkerDragEndOnSubscribe.getOnSubscribe(supportMapFragment));
+        return mapSubject.flatMap(new MarkerDragEndFunc());
     }
 
     public Observable<Marker> getMarkerClickObservable() {
-        return Observable.create(MarkerClickedOnSubscribe.getOnSubscribe(supportMapFragment));
+        return mapSubject.flatMap(new MarkerClickFunc());
     }
 
     public Observable<Marker> getInfoWindowClickObservable() {
-        return Observable.create(InfoWindowOnSubscribe.getOnSubscribe(supportMapFragment));
+        return mapSubject.flatMap(new InfoWindowClickFunc());
     }
 
     public Observable<Marker> getInfoWindowLongClickObservable() {
-        return Observable.create(InfoLongClickOnSubscribe.getOnSubscribe(supportMapFragment));
+        return mapSubject.flatMap(new InfoWindowLongClickFunc());
     }
 
     public Observable<Marker> getInfoWindowCloseObservable() {
-        return Observable.create(InfoClosedOnSubscribe.getOnSubscribe(supportMapFragment));
+        return mapSubject.flatMap(new InfoWindowCloseFunc());
     }
 
     public Observable<CameraPosition> getCameraChangeObservable() {
-        return Observable.create(CameraPositionOnSubscribe.getObservable(supportMapFragment));
+        return mapSubject.flatMap(new CameraPositionFunc());
     }
 
     public Observable<CameraPosition> getCameraTiltChangeObservable() {
-        return Observable.create(CameraPositionOnSubscribe.getObservable(supportMapFragment))
+        return mapSubject.flatMap(new CameraPositionFunc())
                 .filter(new TiltChangeFilter());
     }
 
     public Observable<CameraPosition> getCameraZoomChangeObservable() {
-        return Observable.create(CameraPositionOnSubscribe.getObservable(supportMapFragment))
+        return mapSubject.flatMap(new CameraPositionFunc())
                 .filter(new ZoomLevelFilter());
     }
 
     public Observable<IndoorBuilding> getIndoorLevelActivatedOnSubscribe() {
-        return Observable.create(IndoorLevelActivatedOnSubscribe.getOnSubscribe(supportMapFragment));
+        return mapSubject.flatMap(new IndoorLevelActivatedFunc());
     }
 
     public Observable<Void> getIndoorBuildingFocusedOnSubscribe() {
-        return Observable.create(IndoorBuildingFocusedOnSubscribe.getOnSubscribe(supportMapFragment));
+        return mapSubject.flatMap(new IndoorBuildingFocusedFunc());
     }
 
     public Observable<Polyline> getPolylineClickObservable() {
-        return Observable.create(PolylineClickOnSubscribe.getOnSubscribe(supportMapFragment));
+        return mapSubject.flatMap(new PolylineClickFunc());
     }
 
     public Observable<Polygon> getPolygonClickObservable() {
-        return Observable.create(PolygonClickOnSubscribe.getOnSubscribe(supportMapFragment));
+        return mapSubject.flatMap(new PolygonClickFunc());
     }
 
     public Observable<GroundOverlay> getGroundOverlayObservable() {
-        return Observable.create(GroundOverlayClickOnSubscribe.getOnSubscribe(supportMapFragment));
+        return mapSubject.flatMap(new GroundOverlayClickFunc());
     }
 
 }
