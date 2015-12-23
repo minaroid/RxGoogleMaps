@@ -2,6 +2,7 @@ package com.sdoward.rxgooglemap;
 
 import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.*;
+import com.sdoward.rxgooglemap.events.*;
 
 import rx.*;
 import rx.subjects.*;
@@ -67,16 +68,8 @@ public class MapObservableProvider {
         return mapSubject.flatMap(new MapLongClickFunc());
     }
 
-    public Observable<Marker> getDragStartObservable() {
-        return mapSubject.flatMap(new MarkerDragStartFunc());
-    }
-
-    public Observable<Marker> getDragObservable() {
+    public Observable<DragEvent> getDragObservable() {
         return mapSubject.flatMap(new MarkerDragFunc());
-    }
-
-    public Observable<Marker> getDragEndObservable() {
-        return mapSubject.flatMap(new MarkerDragEndFunc());
     }
 
     public Observable<Marker> getMarkerClickObservable() {
