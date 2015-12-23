@@ -45,6 +45,10 @@ public class MapObservableProvider {
         return Observable.create(InfoWindowOnSubscribe.getOnSubscribe(supportMapFragment));
     }
 
+    public Observable<Marker> getInfoWindowLongClickObservable() {
+        return Observable.create(InfoLongClickOnSubscribe.getOnSubscribe(supportMapFragment));
+    }
+
     public Observable<CameraPosition> getCameraChangeObservable() {
         return Observable.create(CameraPositionOnSubscribe.getObservable(supportMapFragment));
     }
