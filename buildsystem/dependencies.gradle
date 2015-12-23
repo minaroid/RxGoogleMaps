@@ -1,0 +1,28 @@
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+ext {
+
+    playServicesVersion = '8.1.0'
+    supportVersion = '23.0.1'
+    rxAndroidVersion = '1.0.1'
+    rxJavaVersion = '1.0.14'
+
+
+    exampleDependencies = [
+            playServices: "com.google.android.gms:play-services:${playServicesVersion}",
+            appCompat   : "com.android.support:appcompat-v7:${supportVersion}",
+            rxAndroid    : "io.reactivex:rxandroid:${rxAndroidVersion}",
+            rxJava      : "io.reactivex:rxjava:${rxJavaVersion}"
+    ]
+
+    libraryDependencies = [
+            playServices: "com.google.android.gms:play-services:${playServicesVersion}",
+            rxAndroid    : "io.reactivex:rxandroid:${rxAndroidVersion}",
+            rxJava      : "io.reactivex:rxjava:${rxJavaVersion}"
+    ]
+
+}

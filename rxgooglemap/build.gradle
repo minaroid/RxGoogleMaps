@@ -25,11 +25,13 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
-    compile 'com.google.android.gms:play-services:8.1.0'
-    compile 'io.reactivex:rxandroid:1.0.1'
-    compile 'io.reactivex:rxjava:1.0.14'
+
+    def libraryDependencies = rootProject.ext.libraryDependencies
+
+    compile libraryDependencies.playServices
+    compile libraryDependencies.rxAndroid
+    compile libraryDependencies.rxJava
+    
 }
 
 apply from: 'https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-jar.gradle'
