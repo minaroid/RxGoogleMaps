@@ -6,7 +6,7 @@ import rx.Observer;
 
 public class MapReadyOnSubscribe extends BaseOnSubscribe<GoogleMap> {
 
-    public static MapReadyOnSubscribe getMapReadOnSubscribe(SupportMapFragment supportMapFragment) {
+    public static MapReadyOnSubscribe getOnSubscribe(SupportMapFragment supportMapFragment) {
         return new MapReadyOnSubscribe(supportMapFragment);
     }
 

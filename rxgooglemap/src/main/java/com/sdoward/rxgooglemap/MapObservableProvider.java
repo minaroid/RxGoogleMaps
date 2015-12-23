@@ -14,7 +14,7 @@ public class MapObservableProvider {
     }
 
     public Observable<GoogleMap> getMapReadyObservable() {
-        return Observable.create(MapReadyOnSubscribe.getMapReadOnSubscribe(supportMapFragment));
+        return Observable.create(MapReadyOnSubscribe.getOnSubscribe(supportMapFragment));
     }
 
     public Observable<LatLng> getMapClickObservable() {
@@ -47,6 +47,10 @@ public class MapObservableProvider {
 
     public Observable<Marker> getInfoWindowLongClickObservable() {
         return Observable.create(InfoLongClickOnSubscribe.getOnSubscribe(supportMapFragment));
+    }
+
+    public Observable<Marker> getInfoWindowCloseObservable() {
+        return Observable.create(InfoClosedOnSubscribe.getOnSubscribe(supportMapFragment));
     }
 
     public Observable<CameraPosition> getCameraChangeObservable() {
