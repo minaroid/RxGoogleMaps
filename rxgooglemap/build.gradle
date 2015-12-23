@@ -29,9 +29,8 @@ dependencies {
     def libraryDependencies = rootProject.ext.libraryDependencies
 
     compile libraryDependencies.playServices
-    compile libraryDependencies.rxAndroid
     compile libraryDependencies.rxJava
     
 }
 
-apply from: 'https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-jar.gradle'
+apply from: 'https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle'
