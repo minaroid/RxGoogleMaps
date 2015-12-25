@@ -8,7 +8,7 @@ The idea of this library to handle interactions with google maps through rxJava.
 
 ```groovy
 compile 'com.sdoward:rxGoogleMaps:0.2@aar'
-compile 'compile 'io.reactivex:rxjava:1.1.0'
+compile 'compile io.reactivex:rxjava:1.1.0'
 compile 'com.google.android.gms:play-services-maps:8.4.0'
 ```
 
