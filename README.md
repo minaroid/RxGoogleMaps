@@ -14,7 +14,7 @@ compile 'com.google.android.gms:play-services-maps:8.4.0'
 
 ## Usage
 
-'''java
+```java
 MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
 mapObservableProvider = new MapObservableProvider(mapFragment);
 mapObservableProvider.getMapClickObservable()
@@ -24,10 +24,9 @@ mapObservableProvider.getMapClickObservable()
                 Log.d(MapsActivity.class.getName(), "map click");
             }
         });
-'''
+```
 
-You can find a more comprehensive example in the 'Example' module.
-
+You can find a more comprehensive example in the `Example` module.
 
 ## API
 
