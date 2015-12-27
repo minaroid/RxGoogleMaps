@@ -12,9 +12,30 @@ compile 'compile io.reactivex:rxjava:1.1.0'
 compile 'com.google.android.gms:play-services-maps:8.4.0'
 ```
 
+## Usage
+
+'''java
+MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
+mapObservableProvider = new MapObservableProvider(mapFragment);
+mapObservableProvider.getMapClickObservable()
+        .subscribe(new Action1<LatLng>() {
+            @Override
+            public void call(LatLng latLng) {
+                Log.d(MapsActivity.class.getName(), "map click");
+            }
+        });
+'''
+
+You can find a more comprehensive example in the 'Example' module.
+
+
 ## API
 
-There is just one class to interact with which is `MapObservableProvider`.
+There is just one class to interact with which is `MapObservableProvider`. This has 3 constructors
+which accepts either...
+ - MapFragment
+ - SupportMapFragment
+ - MapView
 
 This provides the following observables...
  - MapReady
