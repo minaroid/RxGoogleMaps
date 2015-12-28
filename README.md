@@ -2,7 +2,7 @@
 
 [ ![Download](https://api.bintray.com/packages/sddoward/RxGoogleMaps/RxGoogleMaps/images/download.svg) ](https://bintray.com/sddoward/RxGoogleMaps/RxGoogleMaps/_latestVersion)
 
-A library which provides an RxJava wrapper for google maps It is something similar to [Jake Whartons rxBindings] (https://github.com/JakeWharton/RxBinding) but for google maps.
+A library which provides an RxJava wrapper for google maps. It is something similar to [Jake Whartons rxBindings] (https://github.com/JakeWharton/RxBinding) but for google maps.
 
 This is currently using play services 8.4.0
 
