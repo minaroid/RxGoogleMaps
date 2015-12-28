@@ -2,7 +2,9 @@
 
 [ ![Download](https://api.bintray.com/packages/sddoward/RxGoogleMaps/RxGoogleMaps/images/download.svg) ](https://bintray.com/sddoward/RxGoogleMaps/RxGoogleMaps/_latestVersion)
 
-The idea of this library to handle interactions with google maps through rxJava. It can be thought of something similar to [Jake Whartons rxBindings] (https://github.com/JakeWharton/RxBinding) but for google maps. This is currently using play services 8.4.0
+A library which provides an RxJava wrapper for google maps It is something similar to [Jake Whartons rxBindings] (https://github.com/JakeWharton/RxBinding) but for google maps.
+
+This is currently using play services 8.4.0
 
 ## Download
 
@@ -30,7 +32,7 @@ You can find a more comprehensive example in the `Example` module.
 
 ## API
 
-There is just one class to interact with which is `MapObservableProvider`. This has 3 constructors
+There is one class to interact with which is `MapObservableProvider`. This has 3 constructors
 which accepts either...
  - MapFragment
  - SupportMapFragment
