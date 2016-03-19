@@ -1,4 +1,11 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+}
+
 apply plugin: 'com.android.library'
+apply plugin: 'findbugs'
 
 ext {
     PUBLISH_GROUP_ID = 'com.sdoward'
@@ -26,6 +33,19 @@ android {
         }
     }
 }
+
+task findbugs(type: FindBugs) {
+    source = fileTree('src/main/java/')
+    classpath = files()
+    classes = fileTree('build/intermediates/classes/')
+    excludeFilter = file("../config/findbugs_exclude.xml")
+    effort = 'max'
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+}
+
 
 dependencies {
 
