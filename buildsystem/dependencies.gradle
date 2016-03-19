@@ -11,23 +11,24 @@ ext {
     rxAndroidVersion = '1.1.0'
     rxJavaVersion = '1.1.2'
 
-    robolectricVersion = '3.0'
-
+    powermockVersion = '1.6.4'
 
     exampleDependencies = [
             googleMaps: "com.google.android.gms:play-services-maps:${googleMapsVersion}",
-            appCompat   : "com.android.support:appcompat-v7:${supportVersion}",
-            rxAndroid   : "io.reactivex:rxandroid:${rxAndroidVersion}",
-            rxJava      : "io.reactivex:rxjava:${rxJavaVersion}"
+            appCompat : "com.android.support:appcompat-v7:${supportVersion}",
+            rxAndroid : "io.reactivex:rxandroid:${rxAndroidVersion}",
+            rxJava    : "io.reactivex:rxjava:${rxJavaVersion}"
     ]
 
     libraryDependencies = [
             googleMaps: "com.google.android.gms:play-services-maps:${googleMapsVersion}",
-            rxJava      : "io.reactivex:rxjava:${rxJavaVersion}"
+            rxJava    : "io.reactivex:rxjava:${rxJavaVersion}"
     ]
 
     libraryTestDependencies = [
-            robolectric: "org.robolectric:robolectric:${robolectricVersion}"
+            powermockCore   : "org.powermock:powermock-core:${powermockVersion}",
+            powermockMockito: "org.powermock:powermock-api-mockito:${powermockVersion}",
+            powermockJunit  : "org.powermock:powermock-module-junit4:${powermockVersion}"
     ]
 
 }

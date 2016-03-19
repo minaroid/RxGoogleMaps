@@ -44,7 +44,7 @@ android {
     }
 }
 
-task ciBuild(dependsOn:['assemble', 'pmd', 'checkstyle', 'findbugs'])
+task ciBuild(dependsOn: ['assemble', 'pmd', 'checkstyle', 'findbugs'])
 
 task findbugs(type: FindBugs, group: 'staticAnalysis') {
     source = fileTree('src/main/java/')
@@ -92,7 +92,9 @@ dependencies {
 
     def libraryTestDependencies = rootProject.ext.libraryTestDependencies
 
-    testCompile libraryTestDependencies.robolectric
+    testCompile libraryTestDependencies.powermockCore
+    testCompile libraryTestDependencies.powermockMockito
+    testCompile libraryTestDependencies.powermockJunit
 
 }
 
