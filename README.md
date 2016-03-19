@@ -57,7 +57,7 @@ This provides the following observables...
 
 ### Example Setup 
 
-To use the example add `apikey=<your google api key>` to `local.properties` 
+To use the example add `MAP_API_KEY` as an environment variable
 
 License
 -------

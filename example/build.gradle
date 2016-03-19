@@ -13,9 +13,7 @@ android {
     }
     buildTypes {
 
-        Properties properties = new Properties()
-        properties.load(project.rootProject.file('local.properties').newDataInputStream())
-        def apiKey = properties.getProperty('apikey')
+        def apiKey = System.getenv('MAP_API_KEY')
 
         debug {
             resValue "string", "google_maps_key", apiKey
