@@ -9,7 +9,7 @@ ext {
     googleMapsVersion = '8.4.0'
     supportVersion = '23.0.1'
     rxAndroidVersion = '1.1.0'
-    rxJavaVersion = '1.1.0'
+    rxJavaVersion = '1.1.2'
 
     robolectricVersion = '3.0'
 
