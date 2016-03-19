@@ -9,6 +9,7 @@ buildscript {
 
 apply plugin: 'com.android.library'
 apply plugin: 'findbugs'
+apply plugin: 'pmd'
 apply plugin: 'checkstyle'
 
 ext {
@@ -58,6 +59,21 @@ task checkstyle(type: Checkstyle, group: 'staticAnalysis') {
     exclude '**/gen/**'
 
     classpath = files()
+}
+
+pmd {
+    ignoreFailures = false
+    reportsDir = file("$project.buildDir/reports/pmd/")
+}
+
+task pmd(type: Pmd, group: 'staticAnalysis') {
+    ruleSets = ["java-basic", "java-braces", "java-strings", "java-design", "java-unusedcode"]
+    source = fileTree('src/main/java')
+
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
 }
 
 dependencies {

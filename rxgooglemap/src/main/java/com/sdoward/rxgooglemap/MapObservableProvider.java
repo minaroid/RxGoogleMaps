@@ -9,7 +9,7 @@ import rx.subjects.*;
 
 public class MapObservableProvider {
 
-    private Subject<GoogleMap, GoogleMap> mapSubject = BehaviorSubject.create();
+    private final Subject<GoogleMap, GoogleMap> mapSubject = BehaviorSubject.create();
 
     public MapObservableProvider(final SupportMapFragment supportMapFragment) {
         Observable.create(new Observable.OnSubscribe<GoogleMap>() {
