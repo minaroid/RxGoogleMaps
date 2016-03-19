@@ -39,6 +39,8 @@ android {
     }
 }
 
+task ciBuild(dependsOn:['assemble', 'pmd', 'checkstyle', 'findbugs'])
+
 task findbugs(type: FindBugs, group: 'staticAnalysis') {
     source = fileTree('src/main/java/')
     classpath = files()
