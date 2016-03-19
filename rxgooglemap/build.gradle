@@ -31,8 +31,8 @@ dependencies {
 
     def libraryDependencies = rootProject.ext.libraryDependencies
 
-    provided libraryDependencies.googleMaps
-    provided libraryDependencies.rxJava
+    compile libraryDependencies.googleMaps
+    compile libraryDependencies.rxJava
 
     def libraryTestDependencies = rootProject.ext.libraryTestDependencies
 
