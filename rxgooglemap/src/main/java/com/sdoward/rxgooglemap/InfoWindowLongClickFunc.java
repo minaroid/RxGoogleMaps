@@ -13,12 +13,13 @@ class InfoWindowLongClickFunc implements Func1<GoogleMap, Observable<Marker>> {
         return Observable.create(new Observable.OnSubscribe<Marker>() {
             @Override
             public void call(final Subscriber<? super Marker> subscriber) {
-                googleMap.setOnInfoWindowLongClickListener(new GoogleMap.OnInfoWindowLongClickListener() {
-                    @Override
-                    public void onInfoWindowLongClick(Marker marker) {
-                        subscriber.onNext(marker);
-                    }
-                });
+                googleMap.setOnInfoWindowLongClickListener(
+                        new GoogleMap.OnInfoWindowLongClickListener() {
+                            @Override
+                            public void onInfoWindowLongClick(Marker marker) {
+                                subscriber.onNext(marker);
+                            }
+                        });
             }
         });
     }

@@ -14,17 +14,18 @@ class IndoorBuildingFunc implements Func1<GoogleMap, Observable<IndoorBuildingEv
         return Observable.create(new Observable.OnSubscribe<IndoorBuildingEvent>() {
             @Override
             public void call(final Subscriber<? super IndoorBuildingEvent> subscriber) {
-                googleMap.setOnIndoorStateChangeListener(new GoogleMap.OnIndoorStateChangeListener() {
-                    @Override
-                    public void onIndoorBuildingFocused() {
-                        subscriber.onNext(new IndoorBuildingEvent());
-                    }
+                googleMap.setOnIndoorStateChangeListener(
+                        new GoogleMap.OnIndoorStateChangeListener() {
+                            @Override
+                            public void onIndoorBuildingFocused() {
+                                subscriber.onNext(new IndoorBuildingEvent());
+                            }
 
-                    @Override
-                    public void onIndoorLevelActivated(IndoorBuilding indoorBuilding) {
-                        subscriber.onNext(new IndoorLevelActivatedEvent(indoorBuilding));
-                    }
-                });
+                            @Override
+                            public void onIndoorLevelActivated(IndoorBuilding indoorBuilding) {
+                                subscriber.onNext(new IndoorLevelActivatedEvent(indoorBuilding));
+                            }
+                        });
             }
         });
     }

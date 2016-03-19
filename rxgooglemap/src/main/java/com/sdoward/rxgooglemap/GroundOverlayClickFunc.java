@@ -13,12 +13,13 @@ class GroundOverlayClickFunc implements Func1<GoogleMap, Observable<GroundOverla
         return Observable.create(new Observable.OnSubscribe<GroundOverlay>() {
             @Override
             public void call(final Subscriber<? super GroundOverlay> subscriber) {
-                googleMap.setOnGroundOverlayClickListener(new GoogleMap.OnGroundOverlayClickListener() {
-                    @Override
-                    public void onGroundOverlayClick(GroundOverlay groundOverlay) {
-                        subscriber.onNext(groundOverlay);
-                    }
-                });
+                googleMap.setOnGroundOverlayClickListener(
+                        new GoogleMap.OnGroundOverlayClickListener() {
+                            @Override
+                            public void onGroundOverlayClick(GroundOverlay groundOverlay) {
+                                subscriber.onNext(groundOverlay);
+                            }
+                        });
             }
         });
     }

@@ -1,11 +1,15 @@
 buildscript {
     repositories {
         jcenter()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
 }
 
 apply plugin: 'com.android.library'
 apply plugin: 'findbugs'
+apply plugin: 'checkstyle'
 
 ext {
     PUBLISH_GROUP_ID = 'com.sdoward'
@@ -34,7 +38,7 @@ android {
     }
 }
 
-task findbugs(type: FindBugs) {
+task findbugs(type: FindBugs, group: 'staticAnalysis') {
     source = fileTree('src/main/java/')
     classpath = files()
     classes = fileTree('build/intermediates/classes/')
@@ -46,6 +50,15 @@ task findbugs(type: FindBugs) {
     }
 }
 
+task checkstyle(type: Checkstyle, group: 'staticAnalysis') {
+    ignoreFailures false
+    configFile file("../config/checkstyle.xml")
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+
+    classpath = files()
+}
 
 dependencies {
 
