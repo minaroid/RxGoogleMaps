@@ -45,12 +45,13 @@ public class MapsActivity extends FragmentActivity {
                         Log.d(MapsActivity.class.getName(), "map click");
                     }
                 }));
-        subscriptions.add(mapObservableProvider.getCameraChangeObservable().subscribe(new Action1<CameraPosition>() {
-            @Override
-            public void call(CameraPosition cameraPosition) {
-                Log.d(MapsActivity.class.getName(), "camera position changed");
-            }
-        }));
+        subscriptions.add(mapObservableProvider.getCameraChangeObservable()
+                .subscribe(new Action1<CameraPosition>() {
+                    @Override
+                    public void call(CameraPosition cameraPosition) {
+                        Log.d(MapsActivity.class.getName(), "camera position changed");
+                    }
+                }));
     }
 
     @Override
