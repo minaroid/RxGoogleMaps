@@ -35,4 +35,30 @@ public class MarkerDragFuncTest {
         testSubscriber.assertValueCount(2);
     }
 
+    @Test
+    public void shouldEmmitStartDragEvent() throws Exception {
+        TestSubscriber<DragEvent> testSubscriber = new TestSubscriber<>();
+        new MarkerDragFunc().call(googleMap)
+                .subscribe(testSubscriber);
+        verify(googleMap).setOnMarkerDragListener(argumentCaptor.capture());
+        argumentCaptor.getValue().onMarkerDragStart(null);
+        testSubscriber.assertNoErrors();
+        testSubscriber.assertValueCount(1);
+        argumentCaptor.getValue().onMarkerDragStart(null);
+        testSubscriber.assertValueCount(2);
+    }
+
+    @Test
+    public void shouldEmmitEndDragEvent() throws Exception {
+        TestSubscriber<DragEvent> testSubscriber = new TestSubscriber<>();
+        new MarkerDragFunc().call(googleMap)
+                .subscribe(testSubscriber);
+        verify(googleMap).setOnMarkerDragListener(argumentCaptor.capture());
+        argumentCaptor.getValue().onMarkerDragEnd(null);
+        testSubscriber.assertNoErrors();
+        testSubscriber.assertValueCount(1);
+        argumentCaptor.getValue().onMarkerDragEnd(null);
+        testSubscriber.assertValueCount(2);
+    }
+
 }
