@@ -2,6 +2,7 @@
 
 [ ![Download](https://api.bintray.com/packages/sddoward/RxGoogleMaps/RxGoogleMaps/images/download.svg) ](https://bintray.com/sddoward/RxGoogleMaps/RxGoogleMaps/_latestVersion)
 [![Build Status](https://travis-ci.org/sdoward/RxGoogleMaps.svg?branch=master)](https://travis-ci.org/sdoward/RxGoogleMaps)
+<img src="https://img.shields.io/badge/platform-android-green.svg"/>
 [![API](https://img.shields.io/badge/API-14%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=14)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-RxGoogleMaps-green.svg?style=true)](https://android-arsenal.com/details/1/3050)
 
