@@ -11,6 +11,9 @@
 <a href="https://opensource.org/licenses/Apache-2.0" target="_blank"><img src="https://img.shields.io/badge/License-Apache_v2.0-blue.svg?style=flat"/></a>
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-RxGoogleMaps-green.svg?style=true)](https://android-arsenal.com/details/1/3050)
 
+![codecov.io](https://codecov.io/github/sdoward/RxGoogleMaps/branch.svg?branch=master)
+
+
 A library which provides an RxJava wrapper for google maps. It is something similar to [Jake Whartons rxBindings] (https://github.com/JakeWharton/RxBinding) but for google maps.
 
 This is currently using play services 8.4.0
