@@ -15,7 +15,7 @@ apply plugin: 'findbugs'
 apply plugin: 'pmd'
 apply plugin: 'checkstyle'
 apply plugin: 'com.github.ben-manes.versions'
-
+apply plugin: 'jacoco'
 
 ext {
     PUBLISH_GROUP_ID = 'com.sdoward'
@@ -80,6 +80,34 @@ task pmd(type: Pmd, group: 'staticAnalysis') {
     reports {
         xml.enabled = false
         html.enabled = true
+    }
+}
+
+
+jacoco {
+    toolVersion = "0.7.2.201409121644"
+}
+
+project.afterEvaluate {
+
+    tasks.create(name: 'coverage', type: JacocoReport, dependsOn: 'testReleaseUnitTest') {
+        group = "reporting"
+        description = "Generate Jacoco coverage reports for the build."
+        classDirectories = fileTree(
+                dir: 'build/intermediates/classes/release',
+                excludes: ['**/R.class',
+                           '**/R$*.class',
+                           '**/BuildConfig.*',
+                           '**/Manifest*.*']
+        )
+
+        sourceDirectories = files('src/main/java')
+        executionData = files('build/jacoco/testReleaseUnitTest.exec')
+
+        reports {
+            xml.enabled = true
+            html.enabled = true
+        }
     }
 }
 
