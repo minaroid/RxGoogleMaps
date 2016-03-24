@@ -2,12 +2,15 @@ package com.sdoward.rxgooglemap;
 
 import com.google.android.gms.maps.*;
 
+import junit.framework.Assert;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.*;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import rx.Observable;
 import rx.observers.TestSubscriber;
 
 import static org.mockito.Mockito.verify;
@@ -63,4 +66,79 @@ public class MapObservableProviderTest {
         subscriber.assertValue(googleMap);
     }
 
+    @Test
+    public void shouldProvideClickObservable() throws Exception {
+        Observable observable = new MapObservableProvider(mapFragment).getMapClickObservable();
+        Assert.assertNotNull(observable);
+    }
+
+    @Test
+    public void shouldProvideLongClickObservable() throws Exception {
+        Observable observable = new MapObservableProvider(mapFragment).getMapLongClickObservable();
+        Assert.assertNotNull(observable);
+    }
+
+    @Test
+    public void shouldProvideDragObservable() throws Exception {
+        Observable observable = new MapObservableProvider(mapFragment).getDragObservable();
+        Assert.assertNotNull(observable);
+    }
+
+    @Test
+    public void shouldProvideMarkerClickObservable() throws Exception {
+        Observable observable = new MapObservableProvider(mapFragment).getMarkerClickObservable();
+        Assert.assertNotNull(observable);
+    }
+
+    @Test
+    public void shouldProvideInfoWindowClickObservable() throws Exception {
+        Observable observable =
+                new MapObservableProvider(mapFragment).getInfoWindowClickObservable();
+        Assert.assertNotNull(observable);
+    }
+
+    @Test
+    public void shouldProvideInfoLongClickObservable() throws Exception {
+        Observable observable =
+                new MapObservableProvider(mapFragment).getInfoWindowLongClickObservable();
+        Assert.assertNotNull(observable);
+    }
+
+    @Test
+    public void shouldProvideInfoClosedObservable() throws Exception {
+        Observable observable =
+                new MapObservableProvider(mapFragment).getInfoWindowCloseObservable();
+        Assert.assertNotNull(observable);
+    }
+
+    @Test
+    public void shouldProvideCameraChangedObservable() throws Exception {
+        Observable observable = new MapObservableProvider(mapFragment).getCameraChangeObservable();
+        Assert.assertNotNull(observable);
+    }
+
+    @Test
+    public void shouldProvideIndoorBuildingObservable() throws Exception {
+        Observable observable
+                = new MapObservableProvider(mapFragment).getIndoorBuildingObservable();
+        Assert.assertNotNull(observable);
+    }
+
+    @Test
+    public void shouldProvidePolylineClickObservable() throws Exception {
+        Observable observable = new MapObservableProvider(mapFragment).getPolylineClickObservable();
+        Assert.assertNotNull(observable);
+    }
+
+    @Test
+    public void shouldProvidePolygonClickObservable() throws Exception {
+        Observable observable = new MapObservableProvider(mapFragment).getPolygonClickObservable();
+        Assert.assertNotNull(observable);
+    }
+
+    @Test
+    public void shouldProvideGroundOverlayObservable() throws Exception {
+        Observable observable = new MapObservableProvider(mapFragment).getGroundOverlayObservable();
+        Assert.assertNotNull(observable);
+    }
 }
