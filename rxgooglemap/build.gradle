@@ -96,6 +96,7 @@ project.afterEvaluate {
         classDirectories = fileTree(
                 dir: 'build/intermediates/classes/release',
                 excludes: ['**/R.class',
+                           '**/IndoorBuildingEvent.class',
                            '**/R$*.class',
                            '**/BuildConfig.*',
                            '**/Manifest*.*']

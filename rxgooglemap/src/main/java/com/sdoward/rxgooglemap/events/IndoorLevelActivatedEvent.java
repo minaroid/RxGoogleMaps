@@ -12,6 +12,5 @@ public class IndoorLevelActivatedEvent extends IndoorBuildingEvent {
 
     public IndoorBuilding getIndoorBuilding() {
         return indoorBuilding;
-
     }
 }

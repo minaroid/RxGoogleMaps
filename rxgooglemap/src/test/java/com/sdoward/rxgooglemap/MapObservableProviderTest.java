@@ -2,7 +2,7 @@ package com.sdoward.rxgooglemap;
 
 import com.google.android.gms.maps.*;
 
-import org.junit.*;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.*;
 import org.powermock.core.classloader.annotations.PrepareForTest;
