@@ -141,4 +141,17 @@ public class MapObservableProviderTest {
         Observable observable = new MapObservableProvider(mapFragment).getGroundOverlayObservable();
         Assert.assertNotNull(observable);
     }
+
+    @Test
+    public void shouldProvideSnapshotObservable() throws Exception {
+        Observable observable = new MapObservableProvider(mapFragment).getSnapshotObservable();
+        Assert.assertNotNull(observable);
+    }
+
+    @Test
+    public void shouldProvideBitmapSnapshotObservable() throws Exception {
+        Observable observable = new MapObservableProvider(mapFragment).getSnapshotObservable(null);
+        Assert.assertNotNull(observable);
+    }
+
 }

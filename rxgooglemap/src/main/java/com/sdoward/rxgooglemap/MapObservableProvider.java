@@ -1,5 +1,7 @@
 package com.sdoward.rxgooglemap;
 
+import android.graphics.Bitmap;
+
 import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.*;
 import com.sdoward.rxgooglemap.events.*;
@@ -106,6 +108,14 @@ public class MapObservableProvider {
 
     public Observable<GroundOverlay> getGroundOverlayObservable() {
         return mapSubject.flatMap(new GroundOverlayClickFunc());
+    }
+
+    public Observable<Bitmap> getSnapshotObservable() {
+        return mapSubject.flatMap(new SnapshotFunc());
+    }
+
+    public Observable<Bitmap> getSnapshotObservable(Bitmap bitmap) {
+        return mapSubject.flatMap(new BitmapSnapshotFunc(bitmap));
     }
 
 }
