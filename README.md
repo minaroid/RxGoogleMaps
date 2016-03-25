@@ -22,7 +22,7 @@ This is currently using play services 8.4.0
 
 ```groovy
 compile 'com.sdoward:rxgooglemaps:0.2@aar'
-compile 'compile io.reactivex:rxjava:1.1.2'
+compile 'io.reactivex:rxjava:1.1.2'
 compile 'com.google.android.gms:play-services-maps:8.4.0'
 ```
 
