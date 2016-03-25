@@ -6,7 +6,7 @@ import com.google.android.gms.maps.model.Marker;
 import rx.*;
 import rx.functions.Func1;
 
-public class InfoWindowCloseFunc implements Func1<GoogleMap, Observable<Marker>> {
+class InfoWindowCloseFunc implements Func1<GoogleMap, Observable<Marker>> {
 
     @Override
     public Observable<Marker> call(final GoogleMap googleMap) {

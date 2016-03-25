@@ -7,7 +7,7 @@ import com.google.android.gms.maps.GoogleMap;
 import rx.*;
 import rx.functions.Func1;
 
-public class SnapshotFunc implements Func1<GoogleMap, Observable<Bitmap>> {
+class SnapshotFunc implements Func1<GoogleMap, Observable<Bitmap>> {
 
     @Override
     public Observable<Bitmap> call(final GoogleMap googleMap) {
