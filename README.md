@@ -64,6 +64,7 @@ This provides the following observables...
  - DragChange
  - CameraChange
  - IndoorBuildingChange
+ - Snapshot
 
 ### Example Setup 
 
