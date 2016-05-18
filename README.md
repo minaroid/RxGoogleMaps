@@ -25,14 +25,29 @@ compile 'com.google.android.gms:play-services-maps:8.4.0'
 
 ## Usage
 
+Instantiate the ```MapObservableProvider``` by passing in a ```MapFragment```, ```MapView``` or ```SupportMapFragment```
+
 ```java
 MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
 mapObservableProvider = new MapObservableProvider(mapFragment);
+```
+
+You then have access to the GoogleMap observbles. They can be used like so
+
+```java
 mapObservableProvider.getMapClickObservable()
         .subscribe(new Action1<LatLng>() {
             @Override
             public void call(LatLng latLng) {
                 Log.d(MapsActivity.class.getName(), "map click");
+            }
+        });
+        
+apObservableProvider.getCameraChangeObservable()
+        .subscribe(new Action1<CameraPosition>() {
+            @Override
+            public void call(CameraPosition cameraPosition) {
+                 Log.d(MapsActivity.class.getName(), "camera position changed");
             }
         });
 ```
