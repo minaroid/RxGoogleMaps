@@ -6,7 +6,8 @@
 
 
 [![Build Status](https://travis-ci.org/sdoward/RxGoogleMaps.svg?branch=master)](https://travis-ci.org/sdoward/RxGoogleMaps)
-[![codecov.io](https://codecov.io/github/sdoward/RxGoogleMaps/coverage.svg?branch=master)](https://codecov.io/github/sdoward/RxGoogleMaps?branch=master)
+[![codecov.io](https://codecov.io/github/sdoward/RxGoogleMaps/coverage.svg?branch=master)](https://codecov.io/github/sdoward/RxGoogleMaps?branch=master) <a href="http://www.methodscount.com/?lib=com.sdoward%3Arxgooglemaps%3A1.0"><img src="https://img.shields.io/badge/Methods and size-core: 180 | deps: 21088 | 37 KB-e91e63.svg"></img></a>
+
 
 <a href="https://opensource.org/licenses/Apache-2.0" target="_blank"><img src="https://img.shields.io/badge/License-Apache_v2.0-blue.svg?style=flat"/></a>
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-RxGoogleMaps-green.svg?style=true)](https://android-arsenal.com/details/1/3050)
