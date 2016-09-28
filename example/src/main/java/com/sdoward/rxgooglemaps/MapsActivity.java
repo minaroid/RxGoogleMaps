@@ -25,33 +25,55 @@ public class MapsActivity extends FragmentActivity {
                 .findFragmentById(R.id.map);
         mapObservableProvider = new MapObservableProvider(mapFragment);
         subscriptions.add(mapObservableProvider.getMapReadyObservable()
-                .subscribe(new Action1<GoogleMap>() {
-                    @Override
-                    public void call(GoogleMap googleMap) {
-                        Log.d(MapsActivity.class.getName(), "map ready");
-                    }
-                }));
+                                               .subscribe(new Action1<GoogleMap>() {
+                                                   @Override
+                                                   public void call(GoogleMap googleMap) {
+                                                       Log.d(MapsActivity.class.getName(), "map ready");
+                                                   }
+                                               }));
         subscriptions.add(mapObservableProvider.getMapLongClickObservable()
-                .subscribe(new Action1<LatLng>() {
-                    @Override
-                    public void call(LatLng latLng) {
-                        Log.d(MapsActivity.class.getName(), "map long click");
-                    }
-                }));
+                                               .subscribe(new Action1<LatLng>() {
+                                                   @Override
+                                                   public void call(LatLng latLng) {
+                                                       Log.d(MapsActivity.class.getName(), "map long click");
+                                                   }
+                                               }));
         subscriptions.add(mapObservableProvider.getMapClickObservable()
-                .subscribe(new Action1<LatLng>() {
-                    @Override
-                    public void call(LatLng latLng) {
-                        Log.d(MapsActivity.class.getName(), "map click");
-                    }
-                }));
-        subscriptions.add(mapObservableProvider.getCameraChangeObservable()
-                .subscribe(new Action1<CameraPosition>() {
-                    @Override
-                    public void call(CameraPosition cameraPosition) {
-                        Log.d(MapsActivity.class.getName(), "camera position changed");
-                    }
-                }));
+                                               .subscribe(new Action1<LatLng>() {
+                                                   @Override
+                                                   public void call(LatLng latLng) {
+                                                       Log.d(MapsActivity.class.getName(), "map click");
+                                                   }
+                                               }));
+        subscriptions.add(mapObservableProvider.getCameraMoveStartedObservable()
+                                               .subscribe(new Action1<Integer>() {
+                                                   @Override
+                                                   public void call(Integer integer) {
+                                                       Log.d(MapsActivity.class.getName(),
+                                                             "map move started: " + integer);
+                                                   }
+                                               }));
+        subscriptions.add(mapObservableProvider.getCameraMoveObservable()
+                                               .subscribe(new Action1<Void>() {
+                                                   @Override
+                                                   public void call(Void aVoid) {
+                                                       Log.d(MapsActivity.class.getName(), "map move");
+                                                   }
+                                               }));
+        subscriptions.add(mapObservableProvider.getCameraMoveCanceledObservable()
+                                               .subscribe(new Action1<Void>() {
+                                                   @Override
+                                                   public void call(Void aVoid) {
+                                                       Log.d(MapsActivity.class.getName(), "map move canceled");
+                                                   }
+                                               }));
+        subscriptions.add(mapObservableProvider.getCameraIdleObservable()
+                                               .subscribe(new Action1<Void>() {
+                                                   @Override
+                                                   public void call(Void aVoid) {
+                                                       Log.d(MapsActivity.class.getName(), "map camera idle");
+                                                   }
+                                               }));
     }
 
     @Override
