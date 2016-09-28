@@ -6,7 +6,7 @@ allprojects {
 
 ext {
 
-    googleMapsVersion = '8.4.0'
+    googleMapsVersion = '9.6.0'
     supportVersion = '23.0.1'
     rxAndroidVersion = '1.2.1'
     rxJavaVersion = '1.1.6'
