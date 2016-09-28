@@ -90,6 +90,7 @@ public class MapObservableProvider {
         return mapSubject.flatMap(new InfoWindowCloseFunc());
     }
 
+    @Deprecated
     public Observable<CameraPosition> getCameraChangeObservable() {
         return mapSubject.flatMap(new CameraPositionFunc());
     }

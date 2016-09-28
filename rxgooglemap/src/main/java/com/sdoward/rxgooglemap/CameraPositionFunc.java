@@ -6,6 +6,7 @@ import com.google.android.gms.maps.model.*;
 import rx.*;
 import rx.functions.Func1;
 
+@Deprecated
 class CameraPositionFunc implements Func1<GoogleMap, Observable<CameraPosition>> {
 
     @Override
