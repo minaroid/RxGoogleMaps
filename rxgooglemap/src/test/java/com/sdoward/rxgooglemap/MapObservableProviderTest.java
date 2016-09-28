@@ -124,7 +124,6 @@ public class MapObservableProviderTest {
         Assert.assertNotNull(observable);
     }
 
-
     @Test
     public void shouldProvideCameraMoveObservable() throws Exception {
         Observable observable = new MapObservableProvider(mapFragment).getCameraMoveObservable();
@@ -159,6 +158,12 @@ public class MapObservableProviderTest {
     @Test
     public void shouldProvidePolygonClickObservable() throws Exception {
         Observable observable = new MapObservableProvider(mapFragment).getPolygonClickObservable();
+        Assert.assertNotNull(observable);
+    }
+
+    @Test
+    public void shouldProvidePOIClickObservable() throws Exception {
+        Observable observable = new MapObservableProvider(mapFragment).getPOIClickObservable();
         Assert.assertNotNull(observable);
     }
 

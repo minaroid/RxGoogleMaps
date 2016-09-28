@@ -123,6 +123,10 @@ public class MapObservableProvider {
         return mapSubject.flatMap(new PolygonClickFunc());
     }
 
+    public Observable<PointOfInterest> getPOIClickObservable() {
+        return mapSubject.flatMap(new POIClickFunc());
+    }
+
     public Observable<GroundOverlay> getGroundOverlayObservable() {
         return mapSubject.flatMap(new GroundOverlayClickFunc());
     }
