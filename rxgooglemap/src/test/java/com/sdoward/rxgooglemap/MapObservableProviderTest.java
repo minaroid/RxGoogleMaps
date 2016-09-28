@@ -111,9 +111,35 @@ public class MapObservableProviderTest {
         Assert.assertNotNull(observable);
     }
 
+    @Deprecated
     @Test
     public void shouldProvideCameraChangedObservable() throws Exception {
         Observable observable = new MapObservableProvider(mapFragment).getCameraChangeObservable();
+        Assert.assertNotNull(observable);
+    }
+
+    @Test
+    public void shouldProvideCameraIdleObservable() throws Exception {
+        Observable observable = new MapObservableProvider(mapFragment).getCameraIdleObservable();
+        Assert.assertNotNull(observable);
+    }
+
+
+    @Test
+    public void shouldProvideCameraMoveObservable() throws Exception {
+        Observable observable = new MapObservableProvider(mapFragment).getCameraMoveObservable();
+        Assert.assertNotNull(observable);
+    }
+
+    @Test
+    public void shouldProvideCameraMoveCanceledObservable() throws Exception {
+        Observable observable = new MapObservableProvider(mapFragment).getCameraMoveCanceledObservable();
+        Assert.assertNotNull(observable);
+    }
+
+    @Test
+    public void shouldProvideCameraMoveStartedObservable() throws Exception {
+        Observable observable = new MapObservableProvider(mapFragment).getCameraMoveStartedObservable();
         Assert.assertNotNull(observable);
     }
 

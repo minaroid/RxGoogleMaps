@@ -95,6 +95,22 @@ public class MapObservableProvider {
         return mapSubject.flatMap(new CameraPositionFunc());
     }
 
+    public Observable<Void> getCameraIdleObservable() {
+        return mapSubject.flatMap(new CameraIdleFunc());
+    }
+
+    public Observable<Void> getCameraMoveObservable() {
+        return mapSubject.flatMap(new CameraMoveFunc());
+    }
+
+    public Observable<Void> getCameraMoveCanceledObservable() {
+        return mapSubject.flatMap(new CameraMoveCanceledFunc());
+    }
+
+    public Observable<Integer> getCameraMoveStartedObservable() {
+        return mapSubject.flatMap(new CameraMoveStartedFunc());
+    }
+
     public Observable<IndoorBuildingEvent> getIndoorBuildingObservable() {
         return mapSubject.flatMap(new IndoorBuildingFunc());
     }
