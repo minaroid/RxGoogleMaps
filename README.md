@@ -19,7 +19,7 @@ This is currently using play services 9.6.0
 ## Download
 
 ```groovy
-compile 'com.sdoward:rxgooglemaps:1.1@aar'
+compile 'com.sdoward:rxgooglemaps:1.1.1@aar'
 compile 'io.reactivex:rxjava:1.2.0'
 compile 'com.google.android.gms:play-services-maps:9.6.0'
 ```
