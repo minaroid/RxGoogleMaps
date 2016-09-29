@@ -5,7 +5,7 @@ import rx.Observable;
 import rx.Subscriber;
 import rx.functions.Func1;
 
-public class CameraMoveFunc implements Func1<GoogleMap, Observable<Void>> {
+class CameraMoveFunc implements Func1<GoogleMap, Observable<Void>> {
 
     @Override
     public Observable<Void> call(final GoogleMap googleMap) {
