@@ -14,14 +14,14 @@
 
 A library which provides an RxJava wrapper for google maps. It is something similar to [Jake Whartons rxBindings] (https://github.com/JakeWharton/RxBinding) but for google maps.
 
-This is currently using play services 8.4.0
+This is currently using play services 9.6.0
 
 ## Download
 
 ```groovy
-compile 'com.sdoward:rxgooglemaps:1.0@aar'
-compile 'io.reactivex:rxjava:1.1.2'
-compile 'com.google.android.gms:play-services-maps:8.4.0'
+compile 'com.sdoward:rxgooglemaps:1.1@aar'
+compile 'io.reactivex:rxjava:1.1.6'
+compile 'com.google.android.gms:play-services-maps:9.6.0'
 ```
 
 ## Usage
