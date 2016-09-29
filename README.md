@@ -69,6 +69,7 @@ This provides the following observables...
  - MapLngClick
  - PolylineClick
  - PolygonClick
+ - CircleClick
  - GroundOverlayClick
  - MarkerClick
  - InfoWindowClick
@@ -76,6 +77,10 @@ This provides the following observables...
  - InfoWindowClose
  - DragChange
  - CameraChange
+ - CameraIdle
+ - CameraMove
+ - CameraMoveStarted
+ - CameraMoveCanceled
  - IndoorBuildingChange
  - Snapshot
 
