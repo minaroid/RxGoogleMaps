@@ -28,6 +28,11 @@ public class MapsActivity extends FragmentActivity {
                                                .subscribe(new Action1<GoogleMap>() {
                                                    @Override
                                                    public void call(GoogleMap googleMap) {
+                                                       CircleOptions circleOptions = new CircleOptions()
+                                                               .center(new LatLng(0d, 0d))
+                                                               .radius(100000)
+                                                               .clickable(true);
+                                                       googleMap.addCircle(circleOptions);
                                                        Log.d(MapsActivity.class.getName(), "map ready");
                                                    }
                                                }));
@@ -72,6 +77,13 @@ public class MapsActivity extends FragmentActivity {
                                                    @Override
                                                    public void call(Void aVoid) {
                                                        Log.d(MapsActivity.class.getName(), "map camera idle");
+                                                   }
+                                               }));
+        subscriptions.add(mapObservableProvider.getCircleClickObservable()
+                                               .subscribe(new Action1<Circle>() {
+                                                   @Override
+                                                   public void call(Circle circle) {
+                                                       Log.d(MapsActivity.class.getName(), "circle clicked");
                                                    }
                                                }));
     }

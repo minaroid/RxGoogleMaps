@@ -20,7 +20,7 @@ apply plugin: 'jacoco'
 ext {
     PUBLISH_GROUP_ID = 'com.sdoward'
     PUBLISH_ARTIFACT_ID = 'rxgooglemaps'
-    PUBLISH_VERSION = '1.1'
+    PUBLISH_VERSION = '1.1.1'
 }
 
 android {

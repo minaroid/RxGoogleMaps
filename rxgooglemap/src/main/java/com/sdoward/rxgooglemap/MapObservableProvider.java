@@ -123,6 +123,10 @@ public class MapObservableProvider {
         return mapSubject.flatMap(new PolygonClickFunc());
     }
 
+    public Observable<Circle> getCircleClickObservable() {
+        return mapSubject.flatMap(new CircleClickFunc());
+    }
+
     public Observable<PointOfInterest> getPOIClickObservable() {
         return mapSubject.flatMap(new POIClickFunc());
     }

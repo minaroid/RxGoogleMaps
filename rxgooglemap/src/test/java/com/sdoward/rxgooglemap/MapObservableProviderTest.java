@@ -162,6 +162,12 @@ public class MapObservableProviderTest {
     }
 
     @Test
+    public void shouldProvideCircleClickObservable() throws Exception {
+        Observable observable = new MapObservableProvider(mapFragment).getCircleClickObservable();
+        Assert.assertNotNull(observable);
+    }
+
+    @Test
     public void shouldProvidePOIClickObservable() throws Exception {
         Observable observable = new MapObservableProvider(mapFragment).getPOIClickObservable();
         Assert.assertNotNull(observable);
