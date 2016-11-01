@@ -16,7 +16,7 @@ android {
     def apiKey = System.getenv('MAP_API_KEY')
 
     debug {
-      resValue "string", "google_maps_key", apiKey
+      resValue "string", "google_maps_key", ""
     }
   }
 }

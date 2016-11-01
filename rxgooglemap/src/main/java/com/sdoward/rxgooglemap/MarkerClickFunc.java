@@ -4,7 +4,6 @@ import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.Marker;
 
 import rx.*;
-import rx.functions.Func0;
 import rx.functions.Func1;
 
 class MarkerClickFunc implements Func1<GoogleMap, Observable<Marker>> {
