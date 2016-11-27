@@ -44,7 +44,7 @@ mapObservableProvider.getMapClickObservable()
             }
         });
         
-apObservableProvider.getCameraChangeObservable()
+mapObservableProvider.getCameraChangeObservable()
         .subscribe(new Action1<CameraPosition>() {
             @Override
             public void call(CameraPosition cameraPosition) {
