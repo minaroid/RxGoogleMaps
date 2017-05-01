@@ -6,12 +6,12 @@ allprojects {
 
 ext {
 
-    googleMapsVersion = '9.6.0'
-    supportVersion = '23.0.1'
+    googleMapsVersion = '10.2.0'
+    supportVersion = '25.2.0'
     rxAndroidVersion = '1.2.1'
-    rxJavaVersion = '1.2.0'
+    rxJavaVersion = '1.2.10'
 
-    powermockVersion = '1.6.4'
+    powermockVersion = '1.6.6'
 
     exampleDependencies = [
             googleMaps: "com.google.android.gms:play-services-maps:${googleMapsVersion}",
