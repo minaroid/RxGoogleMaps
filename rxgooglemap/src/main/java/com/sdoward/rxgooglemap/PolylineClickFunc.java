@@ -3,20 +3,22 @@ package com.sdoward.rxgooglemap;
 import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.Polyline;
 
-import rx.*;
-import rx.functions.Func1;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.functions.Function;
 
-class PolylineClickFunc implements Func1<GoogleMap, Observable<Polyline>> {
+class PolylineClickFunc implements Function<GoogleMap, Observable<Polyline>> {
 
     @Override
-    public Observable<Polyline> call(final GoogleMap googleMap) {
-        return Observable.create(new Observable.OnSubscribe<Polyline>() {
+    public Observable<Polyline> apply(final GoogleMap googleMap) {
+        return Observable.create(new ObservableOnSubscribe<Polyline>() {
             @Override
-            public void call(final Subscriber<? super Polyline> subscriber) {
+            public void subscribe(final ObservableEmitter<Polyline> emitter) {
                 googleMap.setOnPolylineClickListener(new GoogleMap.OnPolylineClickListener() {
                     @Override
                     public void onPolylineClick(Polyline polyline) {
-                        subscriber.onNext(polyline);
+                        emitter.onNext(polyline);
                     }
                 });
             }

@@ -9,29 +9,31 @@ import org.mockito.*;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import rx.observers.TestSubscriber;
+import io.reactivex.observers.TestObserver;
 
 import static org.mockito.Mockito.verify;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(GoogleMap.class)
+@PrepareForTest({GoogleMap.class, Marker.class})
 public class InfoWindowLongClickFuncTest {
 
     @Mock
     private GoogleMap googleMap;
+    @Mock
+    private Marker marker;
     @Captor
     private ArgumentCaptor<GoogleMap.OnInfoWindowLongClickListener> argumentCaptor;
 
     @Test
     public void shouldEmmitMarker() throws Exception {
-        TestSubscriber<Marker> testSubscriber = new TestSubscriber<>();
-        new InfoWindowLongClickFunc().call(googleMap)
+        TestObserver<Marker> testSubscriber = new TestObserver<>();
+        new InfoWindowLongClickFunc().apply(googleMap)
                 .subscribe(testSubscriber);
         verify(googleMap).setOnInfoWindowLongClickListener(argumentCaptor.capture());
-        argumentCaptor.getValue().onInfoWindowLongClick(null);
+        argumentCaptor.getValue().onInfoWindowLongClick(marker);
         testSubscriber.assertNoErrors();
         testSubscriber.assertValueCount(1);
-        argumentCaptor.getValue().onInfoWindowLongClick(null);
+        argumentCaptor.getValue().onInfoWindowLongClick(marker);
         testSubscriber.assertValueCount(2);
     }
 

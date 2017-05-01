@@ -8,14 +8,14 @@ import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.*;
 import com.sdoward.rxgooglemap.MapObservableProvider;
 
-import rx.functions.Action1;
-import rx.subscriptions.*;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
 
 public class MapsActivity extends FragmentActivity {
 
     private SupportMapFragment mapFragment;
     private MapObservableProvider mapObservableProvider;
-    private CompositeSubscription subscriptions = Subscriptions.from();
+    private CompositeDisposable subscriptions = new CompositeDisposable();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +25,9 @@ public class MapsActivity extends FragmentActivity {
                 .findFragmentById(R.id.map);
         mapObservableProvider = new MapObservableProvider(mapFragment);
         subscriptions.add(mapObservableProvider.getMapReadyObservable()
-                                               .subscribe(new Action1<GoogleMap>() {
+                                               .subscribe(new Consumer<GoogleMap>() {
                                                    @Override
-                                                   public void call(GoogleMap googleMap) {
+                                                   public void accept(GoogleMap googleMap) {
                                                        CircleOptions circleOptions = new CircleOptions()
                                                                .center(new LatLng(0d, 0d))
                                                                .radius(100000)
@@ -37,52 +37,52 @@ public class MapsActivity extends FragmentActivity {
                                                    }
                                                }));
         subscriptions.add(mapObservableProvider.getMapLongClickObservable()
-                                               .subscribe(new Action1<LatLng>() {
+                                               .subscribe(new Consumer<LatLng>() {
                                                    @Override
-                                                   public void call(LatLng latLng) {
+                                                   public void accept(LatLng latLng) {
                                                        Log.d(MapsActivity.class.getName(), "map long click");
                                                    }
                                                }));
         subscriptions.add(mapObservableProvider.getMapClickObservable()
-                                               .subscribe(new Action1<LatLng>() {
+                                               .subscribe(new Consumer<LatLng>() {
                                                    @Override
-                                                   public void call(LatLng latLng) {
+                                                   public void accept(LatLng latLng) {
                                                        Log.d(MapsActivity.class.getName(), "map click");
                                                    }
                                                }));
         subscriptions.add(mapObservableProvider.getCameraMoveStartedObservable()
-                                               .subscribe(new Action1<Integer>() {
+                                               .subscribe(new Consumer<Integer>() {
                                                    @Override
-                                                   public void call(Integer integer) {
+                                                   public void accept(Integer integer) {
                                                        Log.d(MapsActivity.class.getName(),
                                                              "map move started: " + integer);
                                                    }
                                                }));
         subscriptions.add(mapObservableProvider.getCameraMoveObservable()
-                                               .subscribe(new Action1<Void>() {
+                                               .subscribe(new Consumer<Boolean>() {
                                                    @Override
-                                                   public void call(Void aVoid) {
+                                                   public void accept(Boolean ignored) {
                                                        Log.d(MapsActivity.class.getName(), "map move");
                                                    }
                                                }));
         subscriptions.add(mapObservableProvider.getCameraMoveCanceledObservable()
-                                               .subscribe(new Action1<Void>() {
+                                               .subscribe(new Consumer<Boolean>() {
                                                    @Override
-                                                   public void call(Void aVoid) {
+                                                   public void accept(Boolean ignored) {
                                                        Log.d(MapsActivity.class.getName(), "map move canceled");
                                                    }
                                                }));
         subscriptions.add(mapObservableProvider.getCameraIdleObservable()
-                                               .subscribe(new Action1<Void>() {
+                                               .subscribe(new Consumer<Boolean>() {
                                                    @Override
-                                                   public void call(Void aVoid) {
+                                                   public void accept(Boolean ignored) {
                                                        Log.d(MapsActivity.class.getName(), "map camera idle");
                                                    }
                                                }));
         subscriptions.add(mapObservableProvider.getCircleClickObservable()
-                                               .subscribe(new Action1<Circle>() {
+                                               .subscribe(new Consumer<Circle>() {
                                                    @Override
-                                                   public void call(Circle circle) {
+                                                   public void accept(Circle circle) {
                                                        Log.d(MapsActivity.class.getName(), "circle clicked");
                                                    }
                                                }));
@@ -91,6 +91,6 @@ public class MapsActivity extends FragmentActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        subscriptions.unsubscribe();
+        subscriptions.dispose();
     }
 }

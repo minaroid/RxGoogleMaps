@@ -10,7 +10,7 @@ import org.mockito.*;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import rx.observers.TestSubscriber;
+import io.reactivex.observers.TestObserver;
 
 import static org.mockito.Mockito.verify;
 
@@ -20,6 +20,8 @@ public class BitmapSnapshotFuncTest {
 
     @Mock
     private GoogleMap googleMap;
+    @Mock
+    private Bitmap bitmap;
     @Captor
     private ArgumentCaptor<GoogleMap.SnapshotReadyCallback> argumentCaptor;
     @Captor
@@ -27,14 +29,14 @@ public class BitmapSnapshotFuncTest {
 
     @Test
     public void shouldProvideBitmap() throws Exception {
-        TestSubscriber<Bitmap> testSubscriber = new TestSubscriber<>();
-        new BitmapSnapshotFunc(null).call(googleMap)
+        TestObserver<Bitmap> testSubscriber = new TestObserver<>();
+        new BitmapSnapshotFunc(null).apply(googleMap)
                 .subscribe(testSubscriber);
         verify(googleMap).snapshot(argumentCaptor.capture(), bitmapArgumentCaptor.capture());
-        argumentCaptor.getValue().onSnapshotReady(null);
+        argumentCaptor.getValue().onSnapshotReady(bitmap);
         testSubscriber.assertNoErrors();
         testSubscriber.assertValueCount(1);
-        testSubscriber.assertValue(null);
+        testSubscriber.assertValue(bitmap);
     }
 
 }

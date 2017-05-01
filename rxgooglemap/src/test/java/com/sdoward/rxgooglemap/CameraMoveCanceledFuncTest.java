@@ -10,7 +10,8 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
-import rx.observers.TestSubscriber;
+
+import io.reactivex.observers.TestObserver;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(GoogleMap.class)
@@ -23,8 +24,8 @@ public class CameraMoveCanceledFuncTest {
 
     @Test
     public void shouldEmmitMarker() throws Exception {
-        TestSubscriber<Void> testSubscriber = new TestSubscriber<>();
-        new CameraMoveCanceledFunc().call(googleMap)
+        TestObserver<Boolean> testSubscriber = new TestObserver<>();
+        new CameraMoveCanceledFunc().apply(googleMap)
                                     .subscribe(testSubscriber);
         verify(googleMap).setOnCameraMoveCanceledListener(argumentCaptor.capture());
         argumentCaptor.getValue().onCameraMoveCanceled();

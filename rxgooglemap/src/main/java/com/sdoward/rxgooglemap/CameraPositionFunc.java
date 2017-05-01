@@ -3,21 +3,23 @@ package com.sdoward.rxgooglemap;
 import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.*;
 
-import rx.*;
-import rx.functions.Func1;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.functions.Function;
 
 @Deprecated
-class CameraPositionFunc implements Func1<GoogleMap, Observable<CameraPosition>> {
+class CameraPositionFunc implements Function<GoogleMap, Observable<CameraPosition>> {
 
     @Override
-    public Observable<CameraPosition> call(final GoogleMap googleMap) {
-        return Observable.create(new Observable.OnSubscribe<CameraPosition>() {
+    public Observable<CameraPosition> apply(final GoogleMap googleMap) {
+        return Observable.create(new ObservableOnSubscribe<CameraPosition>() {
             @Override
-            public void call(final Subscriber<? super CameraPosition> subscriber) {
+            public void subscribe(final ObservableEmitter<CameraPosition> emitter) {
                 googleMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
                     @Override
                     public void onCameraChange(CameraPosition cameraPosition) {
-                        subscriber.onNext(cameraPosition);
+                        emitter.onNext(cameraPosition);
                     }
                 });
             }

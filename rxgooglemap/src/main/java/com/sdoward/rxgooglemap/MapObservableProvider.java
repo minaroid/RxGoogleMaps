@@ -6,21 +6,24 @@ import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.*;
 import com.sdoward.rxgooglemap.events.*;
 
-import rx.*;
-import rx.subjects.*;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.subjects.BehaviorSubject;
+import io.reactivex.subjects.Subject;
 
 public class MapObservableProvider {
 
-    private final Subject<GoogleMap, GoogleMap> mapSubject = BehaviorSubject.create();
+    private final Subject<GoogleMap> mapSubject = BehaviorSubject.create();
 
     public MapObservableProvider(final SupportMapFragment supportMapFragment) {
-        Observable.create(new Observable.OnSubscribe<GoogleMap>() {
+        Observable.create(new ObservableOnSubscribe<GoogleMap>() {
             @Override
-            public void call(final Subscriber<? super GoogleMap> subscriber) {
+            public void subscribe(final ObservableEmitter<GoogleMap> emitter) {
                 OnMapReadyCallback mapReadyCallback = new OnMapReadyCallback() {
                     @Override
                     public void onMapReady(GoogleMap googleMap) {
-                        subscriber.onNext(googleMap);
+                        emitter.onNext(googleMap);
                     }
                 };
                 supportMapFragment.getMapAsync(mapReadyCallback);
@@ -29,13 +32,13 @@ public class MapObservableProvider {
     }
 
     public MapObservableProvider(final MapFragment mapFragment) {
-        Observable.create(new Observable.OnSubscribe<GoogleMap>() {
+        Observable.create(new ObservableOnSubscribe<GoogleMap>() {
             @Override
-            public void call(final Subscriber<? super GoogleMap> subscriber) {
+            public void subscribe(final ObservableEmitter<GoogleMap> emitter) {
                 OnMapReadyCallback mapReadyCallback = new OnMapReadyCallback() {
                     @Override
                     public void onMapReady(GoogleMap googleMap) {
-                        subscriber.onNext(googleMap);
+                        emitter.onNext(googleMap);
                     }
                 };
                 mapFragment.getMapAsync(mapReadyCallback);
@@ -44,13 +47,13 @@ public class MapObservableProvider {
     }
 
     public MapObservableProvider(final MapView mapView) {
-        Observable.create(new Observable.OnSubscribe<GoogleMap>() {
+        Observable.create(new ObservableOnSubscribe<GoogleMap>() {
             @Override
-            public void call(final Subscriber<? super GoogleMap> subscriber) {
+            public void subscribe(final ObservableEmitter<GoogleMap> emitter) {
                 OnMapReadyCallback mapReadyCallback = new OnMapReadyCallback() {
                     @Override
                     public void onMapReady(GoogleMap googleMap) {
-                        subscriber.onNext(googleMap);
+                        emitter.onNext(googleMap);
                     }
                 };
                 mapView.getMapAsync(mapReadyCallback);
@@ -95,15 +98,15 @@ public class MapObservableProvider {
         return mapSubject.flatMap(new CameraPositionFunc());
     }
 
-    public Observable<Void> getCameraIdleObservable() {
+    public Observable<Boolean> getCameraIdleObservable() {
         return mapSubject.flatMap(new CameraIdleFunc());
     }
 
-    public Observable<Void> getCameraMoveObservable() {
+    public Observable<Boolean> getCameraMoveObservable() {
         return mapSubject.flatMap(new CameraMoveFunc());
     }
 
-    public Observable<Void> getCameraMoveCanceledObservable() {
+    public Observable<Boolean> getCameraMoveCanceledObservable() {
         return mapSubject.flatMap(new CameraMoveCanceledFunc());
     }
 

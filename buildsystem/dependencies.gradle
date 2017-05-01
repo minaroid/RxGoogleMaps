@@ -8,21 +8,21 @@ ext {
 
     googleMapsVersion = '10.2.0'
     supportVersion = '25.2.0'
-    rxAndroidVersion = '1.2.1'
-    rxJavaVersion = '1.2.10'
+    rxAndroidVersion = '2.0.1'
+    rxJavaVersion = '2.1.0'
 
     powermockVersion = '1.6.6'
 
     exampleDependencies = [
             googleMaps: "com.google.android.gms:play-services-maps:${googleMapsVersion}",
             appCompat : "com.android.support:appcompat-v7:${supportVersion}",
-            rxAndroid : "io.reactivex:rxandroid:${rxAndroidVersion}",
-            rxJava    : "io.reactivex:rxjava:${rxJavaVersion}"
+            rxAndroid : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+            rxJava    : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
     ]
 
     libraryDependencies = [
             googleMaps: "com.google.android.gms:play-services-maps:${googleMapsVersion}",
-            rxJava    : "io.reactivex:rxjava:${rxJavaVersion}"
+            rxJava    : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
     ]
 
     libraryTestDependencies = [
