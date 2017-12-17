@@ -1,22 +1,24 @@
 package com.sdoward.rxgooglemap;
 
 import com.google.android.gms.maps.GoogleMap;
-import rx.Observable;
-import rx.Subscriber;
-import rx.functions.Func1;
 
-class CameraMoveFunc implements Func1<GoogleMap, Observable<Void>> {
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.functions.Function;
+
+class CameraMoveFunc implements Function<GoogleMap, Observable<Boolean>> {
 
     @Override
-    public Observable<Void> call(final GoogleMap googleMap) {
-        return Observable.create(new Observable.OnSubscribe<Void>() {
+    public Observable<Boolean> apply(final GoogleMap googleMap) {
+        return Observable.create(new ObservableOnSubscribe<Boolean>() {
             @Override
-            public void call(final Subscriber<? super Void> subscriber) {
+            public void subscribe(final ObservableEmitter<Boolean> emitter) {
                 googleMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
 
                     @Override
                     public void onCameraMove() {
-                        subscriber.onNext(null);
+                        emitter.onNext(true);
                     }
 
                 });

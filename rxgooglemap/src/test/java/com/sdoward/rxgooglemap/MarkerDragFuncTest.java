@@ -9,7 +9,7 @@ import org.mockito.*;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import rx.observers.TestSubscriber;
+import io.reactivex.observers.TestObserver;
 
 import static org.mockito.Mockito.verify;
 
@@ -24,8 +24,8 @@ public class MarkerDragFuncTest {
 
     @Test
     public void shouldEmmitDragEvent() throws Exception {
-        TestSubscriber<DragEvent> testSubscriber = new TestSubscriber<>();
-        new MarkerDragFunc().call(googleMap)
+        TestObserver<DragEvent> testSubscriber = new TestObserver<>();
+        new MarkerDragFunc().apply(googleMap)
                 .subscribe(testSubscriber);
         verify(googleMap).setOnMarkerDragListener(argumentCaptor.capture());
         argumentCaptor.getValue().onMarkerDrag(null);
@@ -37,8 +37,8 @@ public class MarkerDragFuncTest {
 
     @Test
     public void shouldEmmitStartDragEvent() throws Exception {
-        TestSubscriber<DragEvent> testSubscriber = new TestSubscriber<>();
-        new MarkerDragFunc().call(googleMap)
+        TestObserver<DragEvent> testSubscriber = new TestObserver<>();
+        new MarkerDragFunc().apply(googleMap)
                 .subscribe(testSubscriber);
         verify(googleMap).setOnMarkerDragListener(argumentCaptor.capture());
         argumentCaptor.getValue().onMarkerDragStart(null);
@@ -50,8 +50,8 @@ public class MarkerDragFuncTest {
 
     @Test
     public void shouldEmmitEndDragEvent() throws Exception {
-        TestSubscriber<DragEvent> testSubscriber = new TestSubscriber<>();
-        new MarkerDragFunc().call(googleMap)
+        TestObserver<DragEvent> testSubscriber = new TestObserver<>();
+        new MarkerDragFunc().apply(googleMap)
                 .subscribe(testSubscriber);
         verify(googleMap).setOnMarkerDragListener(argumentCaptor.capture());
         argumentCaptor.getValue().onMarkerDragEnd(null);

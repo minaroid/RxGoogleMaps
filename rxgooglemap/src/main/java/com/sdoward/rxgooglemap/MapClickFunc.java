@@ -3,20 +3,22 @@ package com.sdoward.rxgooglemap;
 import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.*;
 
-import rx.*;
-import rx.functions.Func1;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.functions.Function;
 
-class MapClickFunc implements Func1<GoogleMap, Observable<LatLng>> {
+class MapClickFunc implements Function<GoogleMap, Observable<LatLng>> {
 
     @Override
-    public Observable<LatLng> call(final GoogleMap googleMap) {
-        return Observable.create(new Observable.OnSubscribe<LatLng>() {
+    public Observable<LatLng> apply(final GoogleMap googleMap) {
+        return Observable.create(new ObservableOnSubscribe<LatLng>() {
             @Override
-            public void call(final Subscriber<? super LatLng> subscriber) {
+            public void subscribe(final ObservableEmitter<LatLng> emitter) {
                 googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                     @Override
                     public void onMapClick(LatLng latLng) {
-                        subscriber.onNext(latLng);
+                        emitter.onNext(latLng);
                     }
                 });
             }

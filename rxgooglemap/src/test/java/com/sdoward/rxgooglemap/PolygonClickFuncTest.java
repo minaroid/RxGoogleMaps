@@ -9,29 +9,31 @@ import org.mockito.*;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import rx.observers.TestSubscriber;
+import io.reactivex.observers.TestObserver;
 
 import static org.mockito.Mockito.verify;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(GoogleMap.class)
+@PrepareForTest({GoogleMap.class, Polygon.class})
 public class PolygonClickFuncTest {
 
     @Mock
     private GoogleMap googleMap;
+    @Mock
+    private Polygon polygon;
     @Captor
     private ArgumentCaptor<GoogleMap.OnPolygonClickListener> argumentCaptor;
 
     @Test
     public void shouldEmmitPolygon() throws Exception {
-        TestSubscriber<Polygon> testSubscriber = new TestSubscriber<>();
-        new PolygonClickFunc().call(googleMap)
+        TestObserver<Polygon> testSubscriber = new TestObserver<>();
+        new PolygonClickFunc().apply(googleMap)
                 .subscribe(testSubscriber);
         verify(googleMap).setOnPolygonClickListener(argumentCaptor.capture());
-        argumentCaptor.getValue().onPolygonClick(null);
+        argumentCaptor.getValue().onPolygonClick(polygon);
         testSubscriber.assertNoErrors();
         testSubscriber.assertValueCount(1);
-        argumentCaptor.getValue().onPolygonClick(null);
+        argumentCaptor.getValue().onPolygonClick(polygon);
         testSubscriber.assertValueCount(2);
     }
 

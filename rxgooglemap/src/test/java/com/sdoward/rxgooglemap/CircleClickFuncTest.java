@@ -11,27 +11,30 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
-import rx.observers.TestSubscriber;
+
+import io.reactivex.observers.TestObserver;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(GoogleMap.class)
+@PrepareForTest({GoogleMap.class, Circle.class})
 public class CircleClickFuncTest {
 
     @Mock
     private GoogleMap googleMap;
+    @Mock
+    private Circle circle;
     @Captor
     private ArgumentCaptor<GoogleMap.OnCircleClickListener> argumentCaptor;
 
     @Test
     public void shouldEmmitMarker() throws Exception {
-        TestSubscriber<Circle> testSubscriber = new TestSubscriber<>();
-        new CircleClickFunc().call(googleMap)
+        TestObserver<Circle> testSubscriber = new TestObserver<>();
+        new CircleClickFunc().apply(googleMap)
                              .subscribe(testSubscriber);
         verify(googleMap).setOnCircleClickListener(argumentCaptor.capture());
-        argumentCaptor.getValue().onCircleClick(null);
+        argumentCaptor.getValue().onCircleClick(circle);
         testSubscriber.assertNoErrors();
         testSubscriber.assertValueCount(1);
-        argumentCaptor.getValue().onCircleClick(null);
+        argumentCaptor.getValue().onCircleClick(circle);
         testSubscriber.assertValueCount(2);
     }
 

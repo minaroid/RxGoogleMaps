@@ -2,21 +2,23 @@ package com.sdoward.rxgooglemap;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Circle;
-import rx.Observable;
-import rx.Subscriber;
-import rx.functions.Func1;
 
-class CircleClickFunc implements Func1<GoogleMap, Observable<Circle>> {
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.functions.Function;
+
+class CircleClickFunc implements Function<GoogleMap, Observable<Circle>> {
 
     @Override
-    public Observable<Circle> call(final GoogleMap googleMap) {
-        return Observable.create(new Observable.OnSubscribe<Circle>() {
+    public Observable<Circle> apply(final GoogleMap googleMap) {
+        return Observable.create(new ObservableOnSubscribe<Circle>() {
             @Override
-            public void call(final Subscriber<? super Circle> subscriber) {
+            public void subscribe(final ObservableEmitter<Circle> emitter) throws Exception {
                 googleMap.setOnCircleClickListener(new GoogleMap.OnCircleClickListener() {
                     @Override
                     public void onCircleClick(Circle circle) {
-                        subscriber.onNext(circle);
+                        emitter.onNext(circle);
                     }
                 });
             }

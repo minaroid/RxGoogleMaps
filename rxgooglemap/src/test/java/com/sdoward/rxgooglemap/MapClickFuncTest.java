@@ -9,7 +9,7 @@ import org.mockito.*;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import rx.observers.TestSubscriber;
+import io.reactivex.observers.TestObserver;
 
 import static org.mockito.Mockito.verify;
 
@@ -24,8 +24,8 @@ public class MapClickFuncTest {
 
     @Test
     public void shouldEmmitLatLng() throws Exception {
-        TestSubscriber<LatLng> testSubscriber = new TestSubscriber<>();
-        new MapClickFunc().call(googleMap)
+        TestObserver<LatLng> testSubscriber = new TestObserver<>();
+        new MapClickFunc().apply(googleMap)
                 .subscribe(testSubscriber);
         verify(googleMap).setOnMapClickListener(argumentCaptor.capture());
         argumentCaptor.getValue().onMapClick(new LatLng(1d, 2d));

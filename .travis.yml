@@ -4,12 +4,12 @@ jdk: oraclejdk8
 android:
   components:
   - tools
-  - build-tools-24.0.2
-  - android-24
+  - build-tools-25.0.2
+  - android-25
   - extra-google-google_play_services
   - extra-google-m2repository
   - extra-android-m2repository
-  - addon-google_apis-google-24
+  - addon-google_apis-google-25
   - add-on
   - extra
 branches:

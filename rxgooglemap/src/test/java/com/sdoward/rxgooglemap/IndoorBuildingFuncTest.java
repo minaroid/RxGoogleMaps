@@ -10,7 +10,7 @@ import org.mockito.*;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import rx.observers.TestSubscriber;
+import io.reactivex.observers.TestObserver;
 
 import static org.mockito.Mockito.verify;
 
@@ -27,8 +27,8 @@ public class IndoorBuildingFuncTest {
 
     @Test
     public void shouldEmmitIndoorBuildingEvent() throws Exception {
-        TestSubscriber<IndoorBuildingEvent> testSubscriber = new TestSubscriber<>();
-        new IndoorBuildingFunc().call(googleMap)
+        TestObserver<IndoorBuildingEvent> testSubscriber = new TestObserver<>();
+        new IndoorBuildingFunc().apply(googleMap)
                 .subscribe(testSubscriber);
         verify(googleMap).setOnIndoorStateChangeListener(argumentCaptor.capture());
         argumentCaptor.getValue().onIndoorBuildingFocused();
@@ -40,8 +40,8 @@ public class IndoorBuildingFuncTest {
 
     @Test
     public void shouldEmmitIndoorLevelActivatedEvent() throws Exception {
-        TestSubscriber<IndoorBuildingEvent> testSubscriber = new TestSubscriber<>();
-        new IndoorBuildingFunc().call(googleMap)
+        TestObserver<IndoorBuildingEvent> testSubscriber = new TestObserver<>();
+        new IndoorBuildingFunc().apply(googleMap)
                 .subscribe(testSubscriber);
         verify(googleMap).setOnIndoorStateChangeListener(argumentCaptor.capture());
         argumentCaptor.getValue().onIndoorLevelActivated(indoorBuilding);

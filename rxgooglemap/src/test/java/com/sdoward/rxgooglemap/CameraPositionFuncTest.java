@@ -9,7 +9,7 @@ import org.mockito.*;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import rx.observers.TestSubscriber;
+import io.reactivex.observers.TestObserver;
 
 import static org.mockito.Mockito.verify;
 
@@ -24,8 +24,8 @@ public class CameraPositionFuncTest {
 
     @Test
     public void shouldEmmitCameraPosition() throws Exception {
-        TestSubscriber<CameraPosition> testSubscriber = new TestSubscriber<>();
-        new CameraPositionFunc().call(googleMap)
+        TestObserver<CameraPosition> testSubscriber = new TestObserver<>();
+        new CameraPositionFunc().apply(googleMap)
                 .subscribe(testSubscriber);
         verify(googleMap).setOnCameraChangeListener(argumentCaptor.capture());
         CameraPosition cameraPosition = new CameraPosition(new LatLng(1d, 2d), 0, 0, 0);

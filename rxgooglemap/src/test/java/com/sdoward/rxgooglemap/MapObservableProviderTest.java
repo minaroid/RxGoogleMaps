@@ -10,8 +10,8 @@ import org.mockito.*;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import rx.Observable;
-import rx.observers.TestSubscriber;
+import io.reactivex.Observable;
+import io.reactivex.observers.TestObserver;
 
 import static org.mockito.Mockito.verify;
 
@@ -32,7 +32,7 @@ public class MapObservableProviderTest {
 
     @Test
     public void shouldReturnMapFromFragment() {
-        TestSubscriber<GoogleMap> subscriber = new TestSubscriber<>();
+        TestObserver<GoogleMap> subscriber = new TestObserver<>();
         new MapObservableProvider(mapFragment)
                 .getMapReadyObservable()
                 .subscribe(subscriber);
@@ -44,7 +44,7 @@ public class MapObservableProviderTest {
 
     @Test
     public void shouldReturnMapFromSupportFragment() {
-        TestSubscriber<GoogleMap> subscriber = new TestSubscriber<>();
+        TestObserver<GoogleMap> subscriber = new TestObserver<>();
         new MapObservableProvider(supportMapFragment)
                 .getMapReadyObservable()
                 .subscribe(subscriber);
@@ -56,7 +56,7 @@ public class MapObservableProviderTest {
 
     @Test
     public void shouldReturnMapFromView() {
-        TestSubscriber<GoogleMap> subscriber = new TestSubscriber<>();
+        TestObserver<GoogleMap> subscriber = new TestObserver<>();
         new MapObservableProvider(mapView)
                 .getMapReadyObservable()
                 .subscribe(subscriber);

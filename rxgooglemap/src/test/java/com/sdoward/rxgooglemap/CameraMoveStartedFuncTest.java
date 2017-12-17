@@ -11,7 +11,8 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
-import rx.observers.TestSubscriber;
+
+import io.reactivex.observers.TestObserver;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(GoogleMap.class)
@@ -24,8 +25,8 @@ public class CameraMoveStartedFuncTest {
 
     @Test
     public void shouldEmmitMarker() throws Exception {
-        TestSubscriber<Integer> testSubscriber = new TestSubscriber<>();
-        new CameraMoveStartedFunc().call(googleMap)
+        TestObserver<Integer> testSubscriber = new TestObserver<>();
+        new CameraMoveStartedFunc().apply(googleMap)
                                    .subscribe(testSubscriber);
         verify(googleMap).setOnCameraMoveStartedListener(argumentCaptor.capture());
         argumentCaptor.getValue().onCameraMoveStarted(0);

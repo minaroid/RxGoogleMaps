@@ -1,22 +1,24 @@
 package com.sdoward.rxgooglemap;
 
-import com.google.android.gms.maps.*;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
 
-import rx.*;
-import rx.functions.Func1;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.functions.Function;
 
-class InfoWindowClickFunc implements Func1<GoogleMap, Observable<Marker>> {
+class InfoWindowClickFunc implements Function<GoogleMap, Observable<Marker>> {
 
     @Override
-    public Observable<Marker> call(final GoogleMap googleMap) {
-        return Observable.create(new Observable.OnSubscribe<Marker>() {
+    public Observable<Marker> apply(final GoogleMap googleMap) {
+        return Observable.create(new ObservableOnSubscribe<Marker>() {
             @Override
-            public void call(final Subscriber<? super Marker> subscriber) {
+            public void subscribe(final ObservableEmitter<Marker> emitter) throws Exception {
                 googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
                     @Override
                     public void onInfoWindowClick(Marker marker) {
-                        subscriber.onNext(marker);
+                        emitter.onNext(marker);
                     }
                 });
             }
