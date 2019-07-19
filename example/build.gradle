@@ -56,5 +56,4 @@ dependencies {
   implementation deps.googlePlayServices.maps
 
   implementation project(path: ':rxgooglemap')
-
 }
