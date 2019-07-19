@@ -40,21 +40,14 @@ mapObservableProvider = new MapObservableProvider(mapFragment);
 You then have access to the GoogleMap observbles. They can be used like so
 
 ```java
-mapObservableProvider.getMapClickObservable()
-        .subscribe(new Action1<LatLng>() {
-            @Override
-            public void call(LatLng latLng) {
-                Log.d(MapsActivity.class.getName(), "map click");
-            }
-        });
+mapObservableProvider.getCameraMoveStartedObservable()
+                .subscribe(integer -> Log.d(TAG, "map move started: " + integer),
+                        throwable -> Log.e(TAG, throwable.getLocalizedMessage()));
         
-mapObservableProvider.getCameraChangeObservable()
-        .subscribe(new Action1<CameraPosition>() {
-            @Override
-            public void call(CameraPosition cameraPosition) {
-                 Log.d(MapsActivity.class.getName(), "camera position changed");
-            }
-        });
+mapObservableProvider.getMapLongClickObservable()
+                .subscribe(latLng -> Log.d(TAG, "map long click"),
+                        throwable -> Log.e(TAG, throwable.getLocalizedMessage()));
+                        
 ```
 
 You can find a more comprehensive example in the `Example` module.
