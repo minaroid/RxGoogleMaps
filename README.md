@@ -23,9 +23,9 @@ I have been doing a bad job at maintaining this libraries if somebody would like
 ## Download
 
 ```groovy
-compile 'com.sdoward:rxgooglemaps:1.1.1@aar'
-compile 'io.reactivex:rxjava:1.2.0'
-compile 'com.google.android.gms:play-services-maps:9.6.0'
+implementation 'com.github.minageorge5080:RxGoogleMaps:1.1.2'
+implementation 'io.reactivex.rxjava2:rxjava:2.0.5'
+implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
 ```
 
 ## Usage
