@@ -23,7 +23,7 @@ I have been doing a bad job at maintaining this libraries if somebody would like
 ## Download
 
 ```groovy
-implementation 'com.github.minageorge5080:RxGoogleMaps:1.1.2'
+implementation 'com.github.minageorge5080:RxGoogleMaps:1.1.3'
 implementation 'io.reactivex.rxjava2:rxjava:2.0.5'
 implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
 ```
