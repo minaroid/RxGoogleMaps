@@ -1,21 +1,22 @@
 package com.sdoward.rxgooglemaps;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+
 import android.util.Log;
-
-import com.google.android.gms.maps.*;
-import com.google.android.gms.maps.model.*;
+import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CircleOptions;
+import com.google.android.gms.maps.model.LatLng;
 import com.sdoward.rxgooglemap.MapObservableProvider;
+import io.reactivex.disposables.CompositeDisposable;
 
-import rx.functions.Action1;
-import rx.subscriptions.*;
+public class MapsActivity extends AppCompatActivity {
 
-public class MapsActivity extends FragmentActivity {
+    private static final String TAG = MapsActivity.class.getSimpleName();
 
     private SupportMapFragment mapFragment;
     private MapObservableProvider mapObservableProvider;
-    private CompositeSubscription subscriptions = Subscriptions.from();
+    private CompositeDisposable disposable = new CompositeDisposable();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,73 +25,53 @@ public class MapsActivity extends FragmentActivity {
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapObservableProvider = new MapObservableProvider(mapFragment);
-        subscriptions.add(mapObservableProvider.getMapReadyObservable()
-                                               .subscribe(new Action1<GoogleMap>() {
-                                                   @Override
-                                                   public void call(GoogleMap googleMap) {
-                                                       CircleOptions circleOptions = new CircleOptions()
-                                                               .center(new LatLng(0d, 0d))
-                                                               .radius(100000)
-                                                               .clickable(true);
-                                                       googleMap.addCircle(circleOptions);
-                                                       Log.d(MapsActivity.class.getName(), "map ready");
-                                                   }
-                                               }));
-        subscriptions.add(mapObservableProvider.getMapLongClickObservable()
-                                               .subscribe(new Action1<LatLng>() {
-                                                   @Override
-                                                   public void call(LatLng latLng) {
-                                                       Log.d(MapsActivity.class.getName(), "map long click");
-                                                   }
-                                               }));
-        subscriptions.add(mapObservableProvider.getMapClickObservable()
-                                               .subscribe(new Action1<LatLng>() {
-                                                   @Override
-                                                   public void call(LatLng latLng) {
-                                                       Log.d(MapsActivity.class.getName(), "map click");
-                                                   }
-                                               }));
-        subscriptions.add(mapObservableProvider.getCameraMoveStartedObservable()
-                                               .subscribe(new Action1<Integer>() {
-                                                   @Override
-                                                   public void call(Integer integer) {
-                                                       Log.d(MapsActivity.class.getName(),
-                                                             "map move started: " + integer);
-                                                   }
-                                               }));
-        subscriptions.add(mapObservableProvider.getCameraMoveObservable()
-                                               .subscribe(new Action1<Void>() {
-                                                   @Override
-                                                   public void call(Void aVoid) {
-                                                       Log.d(MapsActivity.class.getName(), "map move");
-                                                   }
-                                               }));
-        subscriptions.add(mapObservableProvider.getCameraMoveCanceledObservable()
-                                               .subscribe(new Action1<Void>() {
-                                                   @Override
-                                                   public void call(Void aVoid) {
-                                                       Log.d(MapsActivity.class.getName(), "map move canceled");
-                                                   }
-                                               }));
-        subscriptions.add(mapObservableProvider.getCameraIdleObservable()
-                                               .subscribe(new Action1<Void>() {
-                                                   @Override
-                                                   public void call(Void aVoid) {
-                                                       Log.d(MapsActivity.class.getName(), "map camera idle");
-                                                   }
-                                               }));
-        subscriptions.add(mapObservableProvider.getCircleClickObservable()
-                                               .subscribe(new Action1<Circle>() {
-                                                   @Override
-                                                   public void call(Circle circle) {
-                                                       Log.d(MapsActivity.class.getName(), "circle clicked");
-                                                   }
-                                               }));
+
+        disposable.add(mapObservableProvider.getMapReadyObservable()
+                .subscribe(googleMap -> {
+                    CircleOptions circleOptions = new CircleOptions()
+                            .center(new LatLng(0d, 0d))
+                            .radius(100000)
+                            .clickable(true);
+                    googleMap.addCircle(circleOptions);
+                    Log.d(TAG, "map ready");
+                }, throwable -> Log.e(TAG, throwable.getLocalizedMessage())));
+
+
+        disposable.add(mapObservableProvider.getMapLongClickObservable()
+                .subscribe(latLng -> Log.d(TAG, "map long click"),
+                        throwable -> Log.e(TAG, throwable.getLocalizedMessage())));
+
+        disposable.add(mapObservableProvider.getMapClickObservable()
+                .subscribe(latLng -> Log.d(TAG, "map click"),
+                        throwable -> Log.e(TAG, throwable.getLocalizedMessage())));
+
+
+        disposable.add(mapObservableProvider.getCameraMoveStartedObservable()
+                .subscribe(integer -> Log.d(TAG, "map move started: " + integer),
+                        throwable -> Log.e(TAG, throwable.getLocalizedMessage())));
+
+        disposable.add(mapObservableProvider.getCameraMoveObservable()
+                .subscribe(Void -> Log.d(TAG, "map move started"),
+                        throwable -> Log.e(TAG, throwable.getLocalizedMessage())));
+
+        disposable.add(mapObservableProvider.getCameraMoveCanceledObservable()
+                .subscribe(Void -> Log.d(TAG, "map move canceled"),
+                        throwable -> Log.e(TAG, throwable.getLocalizedMessage())));
+
+
+        disposable.add(mapObservableProvider.getCameraIdleObservable()
+                .subscribe(latLng -> Log.d(TAG, "map camera idle "),
+                        throwable -> Log.e(TAG, throwable.getLocalizedMessage())));
+
+        disposable.add(mapObservableProvider.getCircleClickObservable()
+                .subscribe(circle -> Log.d(TAG, "circle clicked"),
+                        throwable -> Log.e(TAG, throwable.getLocalizedMessage())));
+
     }
 
     @Override
     protected void onDestroy() {
+        disposable.dispose();
         super.onDestroy();
-        subscriptions.unsubscribe();
     }
 }

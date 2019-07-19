@@ -1,7 +1,6 @@
 package com.sdoward.rxgooglemap;
 
 import com.google.android.gms.maps.GoogleMap;
-import com.sdoward.rxgooglemap.events.DragEvent;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

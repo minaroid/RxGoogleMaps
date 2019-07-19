@@ -1,130 +1,50 @@
-buildscript {
-    repositories {
-        jcenter()
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-    }
-    dependencies {
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.12.0'
-    }
-}
-
 apply plugin: 'com.android.library'
-apply plugin: 'findbugs'
-apply plugin: 'pmd'
-apply plugin: 'checkstyle'
-apply plugin: 'com.github.ben-manes.versions'
-apply plugin: 'jacoco'
-
-ext {
-    PUBLISH_GROUP_ID = 'com.sdoward'
-    PUBLISH_ARTIFACT_ID = 'rxgooglemaps'
-    PUBLISH_VERSION = '1.1.1'
-}
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.2"
 
+    compileSdkVersion deps.build.compileSdkVersion
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 24
-        versionCode 3
-        versionName "0.3"
+        minSdkVersion deps.build.minSdkVersion
+        targetSdkVersion deps.build.targetSdkVersion
+        versionCode deps.build.versionCode
+        versionName deps.build.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
     }
+
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            manifestPlaceholders = [
-                    lib_name: "RxGoogleMaps"
-            ]
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-}
-
-task ciBuild(dependsOn: ['assemble', 'testReleaseUnitTest', 'pmd', 'checkstyle', 'findbugs', 'coverage'])
-
-task findbugs(type: FindBugs, group: 'staticAnalysis') {
-    source = fileTree('src/main/java/')
-    classpath = files()
-    classes = fileTree('build/intermediates/classes/')
-    excludeFilter = file("../config/findbugs_exclude.xml")
-    effort = 'max'
-    reports {
-        xml.enabled = false
-        html.enabled = true
-    }
-}
-
-task checkstyle(type: Checkstyle, group: 'staticAnalysis') {
-    ignoreFailures false
-    configFile file("../config/checkstyle.xml")
-    source 'src'
-    include '**/*.java'
-    exclude '**/gen/**'
-
-    classpath = files()
-}
-
-pmd {
-    ignoreFailures = false
-    reportsDir = file("$project.buildDir/reports/pmd/")
-}
-
-task pmd(type: Pmd, group: 'staticAnalysis') {
-    ruleSets = ["java-basic", "java-braces", "java-strings", "java-design", "java-unusedcode"]
-    source = fileTree('src/main/java')
-
-    reports {
-        xml.enabled = false
-        html.enabled = true
-    }
-}
-
-
-jacoco {
-    toolVersion = "0.7.2.201409121644"
-}
-
-project.afterEvaluate {
-
-    tasks.create(name: 'coverage', type: JacocoReport, dependsOn: 'testReleaseUnitTest') {
-        group = "reporting"
-        description = "Generate Jacoco coverage reports for the build."
-        classDirectories = fileTree(
-                dir: 'build/intermediates/classes/release',
-                excludes: ['**/R.class',
-                           '**/IndoorBuildingEvent.class',
-                           '**/R$*.class',
-                           '**/BuildConfig.*',
-                           '**/Manifest*.*']
-        )
-
-        sourceDirectories = files('src/main/java')
-        executionData = files('build/jacoco/testReleaseUnitTest.exec')
-
-        reports {
-            xml.enabled = true
-            html.enabled = true
-        }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
 dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "androidx.core:core-ktx:1.0.2"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    def libraryDependencies = rootProject.ext.libraryDependencies
+    // Rx
+    implementation deps.rx.java
+    implementation deps.rx.android
 
-    compile libraryDependencies.googleMaps
-    compile libraryDependencies.rxJava
+    // googleServices
+    implementation deps.googlePlayServices.maps
 
-    def libraryTestDependencies = rootProject.ext.libraryTestDependencies
-
-    testCompile libraryTestDependencies.powermockCore
-    testCompile libraryTestDependencies.powermockMockito
-    testCompile libraryTestDependencies.powermockJunit
+    // test
+    testImplementation deps.test.junit
+    androidTestImplementation deps.test.runner
+    androidTestImplementation deps.test.espresso
 
 }
-
-apply from: 'https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle'
+repositories {
+    mavenCentral()
+}
