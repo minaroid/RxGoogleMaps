@@ -2,7 +2,6 @@ package com.sdoward.rxgooglemap;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.IndoorBuilding;
-import com.sdoward.rxgooglemap.events.IndoorBuildingEvent;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

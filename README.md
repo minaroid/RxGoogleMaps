@@ -2,7 +2,7 @@
 
 [ ![Download](https://api.bintray.com/packages/sddoward/RxGoogleMaps/RxGoogleMaps/images/download.svg) ](https://bintray.com/sddoward/RxGoogleMaps/RxGoogleMaps/_latestVersion)
 <img src="https://img.shields.io/badge/platform-android-green.svg"/>
-[![API](https://img.shields.io/badge/API-14%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=14)
+[![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=14)
 
 
 [![Build Status](https://travis-ci.org/sdoward/RxGoogleMaps.svg?branch=master)](https://travis-ci.org/sdoward/RxGoogleMaps)
@@ -14,7 +14,7 @@
 
 A library which provides an RxJava wrapper for google maps. It is something similar to [Jake Whartons rxBindings] (https://github.com/JakeWharton/RxBinding) but for google maps.
 
-This is currently using play services 9.6.0
+This is currently using play services 17.0.0
 
 ## Ownership
 
@@ -23,9 +23,9 @@ I have been doing a bad job at maintaining this libraries if somebody would like
 ## Download
 
 ```groovy
-compile 'com.sdoward:rxgooglemaps:1.1.1@aar'
-compile 'io.reactivex:rxjava:1.2.0'
-compile 'com.google.android.gms:play-services-maps:9.6.0'
+implementation 'com.github.minageorge5080:RxGoogleMaps:1.1.3'
+implementation 'io.reactivex.rxjava2:rxjava:2.0.5'
+implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
 ```
 
 ## Usage
@@ -40,21 +40,14 @@ mapObservableProvider = new MapObservableProvider(mapFragment);
 You then have access to the GoogleMap observbles. They can be used like so
 
 ```java
-mapObservableProvider.getMapClickObservable()
-        .subscribe(new Action1<LatLng>() {
-            @Override
-            public void call(LatLng latLng) {
-                Log.d(MapsActivity.class.getName(), "map click");
-            }
-        });
+mapObservableProvider.getCameraMoveStartedObservable()
+                .subscribe(integer -> Log.d(TAG, "map move started: " + integer),
+                        throwable -> Log.e(TAG, throwable.getLocalizedMessage()));
         
-mapObservableProvider.getCameraChangeObservable()
-        .subscribe(new Action1<CameraPosition>() {
-            @Override
-            public void call(CameraPosition cameraPosition) {
-                 Log.d(MapsActivity.class.getName(), "camera position changed");
-            }
-        });
+mapObservableProvider.getMapLongClickObservable()
+                .subscribe(latLng -> Log.d(TAG, "map long click"),
+                        throwable -> Log.e(TAG, throwable.getLocalizedMessage()));
+                        
 ```
 
 You can find a more comprehensive example in the `Example` module.

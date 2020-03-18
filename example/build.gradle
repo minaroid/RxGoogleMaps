@@ -1,34 +1,59 @@
 apply plugin: 'com.android.application'
 
-android {
-  compileSdkVersion 24
-  buildToolsVersion "24.0.2"
+apply plugin: 'kotlin-android'
 
+apply plugin: 'kotlin-android-extensions'
+
+android {
+  compileSdkVersion deps.build.compileSdkVersion
   defaultConfig {
     applicationId "com.sdoward.rxgooglemaps"
-    minSdkVersion 14
-    targetSdkVersion 24
-    versionCode 2
-    versionName "0.2"
+    minSdkVersion deps.build.minSdkVersion
+    targetSdkVersion deps.build.targetSdkVersion
+    versionCode deps.build.versionCode
+    versionName deps.build.versionName
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
   }
   buildTypes {
 
     def apiKey = System.getenv('MAP_API_KEY')
 
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    }
+
     debug {
       resValue "string", "google_maps_key", ""
     }
+
+  }
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
   }
 }
 
 dependencies {
+  implementation fileTree(dir: 'libs', include: ['*.jar'])
+  implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+  implementation 'androidx.core:core-ktx:1.0.2'
 
-  def exampleDependencies = rootProject.ext.exampleDependencies
+  // test
+  testImplementation deps.test.junit
+  androidTestImplementation deps.test.runner
+  androidTestImplementation deps.test.espresso
 
-  compile exampleDependencies.appCompat
-  compile exampleDependencies.googleMaps
-  compile exampleDependencies.rxAndroid
-  compile exampleDependencies.rxJava
+  // ui
+  implementation deps.ui.appcompat
+  implementation deps.ui.constraintLayout
 
-  compile project(':rxgooglemap')
+  // Rx
+  implementation deps.rx.java
+  implementation deps.rx.android
+
+  // googleServices
+  implementation deps.googlePlayServices.maps
+
+  implementation project(path: ':rxgooglemap')
 }
