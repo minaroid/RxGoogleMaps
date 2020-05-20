@@ -16,9 +16,7 @@ A library which provides an RxJava wrapper for google maps. It is something simi
 
 This is currently using play services 17.0.0
 
-## Ownership
 
-I have been doing a bad job at maintaining this libraries if somebody would like to take ownership of if please contact me sam.doward@gmail.com
 
 ## Download
 
