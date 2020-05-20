@@ -86,7 +86,7 @@ To use the example add `MAP_API_KEY` as an environment variable
 License
 -------
 
-    Copyright (C) 2015 Sam Doward
+    Copyright (C) 2019 Mina George
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
